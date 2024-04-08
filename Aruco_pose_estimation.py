@@ -87,6 +87,8 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
                             
                         x = '{:.2f}'.format(tvec[0])
                         y = '{:.2f}'.format(tvec[1])
+                        z = '{:.2f}'.format(tvec[2])
+
                         y_sum = 0
                         x_sum = 0
             
@@ -102,7 +104,7 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
 
 
                         print("X CENTER PIXEL: "+str(x_avg)+" Y CENTER PIXEL: "+str(y_avg))
-                        print("MARKER POSITION: x=" +x+" y= "+y+" z="+z)
+                        print("MARKER POSITION: x="+x+" y= "+y+" z="+z)
 
 
 
