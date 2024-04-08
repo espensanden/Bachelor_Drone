@@ -173,5 +173,8 @@ picam2.start_recording(JpegEncoder(), FileOutput(output))
 try:
     address = ('', 8000)
     server = StreamingServer(address, StreamingHandler)
-finally:
+    server.serve_forever()
+except KeyboardInterrupt:
     picam2.stop_recording()
+    server.shutdown()
+    server.server_close()
