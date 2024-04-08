@@ -12,7 +12,7 @@ import math
 import time
 
 found_count = 0
-not_found_count = 0
+notfound_count = 0
 first_run = 0
 
 
@@ -56,7 +56,7 @@ class StreamingOutput(io.BufferedIOBase):
 
 
 def lander(frame):
-    global first_run,notfound_count,found_count,marker_size,start_time
+    global first_run,notfound_count,found_count,start_time
     if first_run==0:
         print("First run of lander!!")
         first_run=1
