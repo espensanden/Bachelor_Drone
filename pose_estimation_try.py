@@ -131,6 +131,12 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
                         output.condition.wait()
                         frame = output.frame
                     processed_frame = lander(frame)
+                    end_time=time.time()
+                    total_time=end_time-start_time
+                    total_time=abs(int(total_time))
+                    total_count=found_count+notfound_count
+                    freq_lander=total_count/total_time
+                    print("lander function had frequency of: "+str(freq_lander))
                     self.wfile.write(b'--FRAME\r\n')
                     self.send_header('Content-Type', 'image/jpeg')
                     self.send_header('Content-Length', len(processed_frame))
