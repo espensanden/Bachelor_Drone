@@ -9,6 +9,12 @@ from picamera2 import Picamera2
 from picamera2.encoders import JpegEncoder
 from picamera2.outputs import FileOutput
 import math
+import time
+
+found_count = 0
+not_found_count = 0
+
+
 
 
 PAGE = """\
@@ -50,35 +56,50 @@ class StreamingOutput(io.BufferedIOBase):
 
 
 def lander(frame):
+    global first_run,notfound_count,found_count,marker_size,start_time
+    if first_run==0:
+        print("First run of lander!!")
+        first_run=1
+        start_time=time.time()
+    
+    
     img = cv2.imdecode(np.frombuffer(frame, dtype=np.uint8), cv2.IMREAD_COLOR)
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     corners, ids, rejected = cv2.aruco.detectMarkers(gray, aruco_dict, parameters=parameters)
 
-    if ids is not None:
-        cv2.aruco.drawDetectedMarkers(img, corners, ids)
+    #if ids is not None:
+        #cv2.aruco.drawDetectedMarkers(img, corners, ids)
+    try:
+        if ids is not None:
+            ret = cv2.aruco.estimatePoseSingleMarkers(corners, 0.1, cameraMatrix, distCoeffs)
+            (rvec, tvec) = (ret[0][0, 0, :], ret[1][0, 0, :])
 
-    if ids is not None:
-        ret = cv2.aruco.estimatePoseSingleMarkers(corners, 0.1, cameraMatrix, distCoeffs)
-        (rvec, tvec) = (ret[0][0, 0, :], ret[1][0, 0, :])
+            x = '{:.2f}'.format(tvec[0])
+            y = '{:.2f}'.format(tvec[1])
+            z = '{:.2f}'.format(tvec[2])
 
-        x = '{:.2f}'.format(tvec[0])
-        y = '{:.2f}'.format(tvec[1])
-        z = '{:.2f}'.format(tvec[2])
+            y_sum = 0
+            x_sum = 0
 
-        y_sum = 0
-        x_sum = 0
+            x_sum = corners[0][0][0][0] + corners[0][0][1][0] + corners[0][0][2][0] + corners[0][0][3][0]
+            y_sum = corners[0][0][0][1] + corners[0][0][1][1] + corners[0][0][2][1] + corners[0][0][3][1]
 
-        x_sum = corners[0][0][0][0] + corners[0][0][1][0] + corners[0][0][2][0] + corners[0][0][3][0]
-        y_sum = corners[0][0][0][1] + corners[0][0][1][1] + corners[0][0][2][1] + corners[0][0][3][1]
+            x_avg = x_sum * .25
+            y_avg = y_sum * .25
 
-        x_avg = x_sum * .25
-        y_avg = y_sum * .25
+            x_ang = (x_avg - horizontal_res * .5) * (horizontal_fov / horizontal_res)
+            y_ang = (y_avg - vertical_res * .5) * (vertical_fov / vertical_res)
 
-        x_ang = (x_avg - horizontal_res * .5) * (horizontal_fov / horizontal_res)
-        y_ang = (y_avg - vertical_res * .5) * (vertical_fov / vertical_res)
+            print("X CENTER PIXEL: " + str(x_avg) + " Y CENTER PIXEL: " + str(y_avg))
+            print("MARKER POSITION: x=" + x + " y= " + y + " z=" + z)
+            found_count=found_count+1
+            print("Found count", found_count)
+        else:
+            notfound_count = notfound_count+1
 
-        print("X CENTER PIXEL: " + str(x_avg) + " Y CENTER PIXEL: " + str(y_avg))
-        print("MARKER POSITION: x=" + x + " y= " + y + " z=" + z)
+    except Exception as e:
+        print('Target likely not found. Error: '+str(e))
+        notfound_count=notfound_count+1
 
     _, jpeg_frame = cv2.imencode('.JPEG', img)
     return jpeg_frame.tobytes()
@@ -142,6 +163,5 @@ try:
     address = ('', 8000)
     server = StreamingServer(address, StreamingHandler)
     server.serve_forever()
-    print("Test")
 finally:
     picam2.stop_recording()
