@@ -14,8 +14,10 @@ import time
 found_count = 0
 notfound_count = 0
 first_run = 0
-
-
+fps = 0
+frame_counter = 0
+start_time = time.time()
+print("Hey")
 
 PAGE = """\
 <html>
@@ -56,19 +58,17 @@ class StreamingOutput(io.BufferedIOBase):
 
 
 def lander(frame):
-    global first_run,notfound_count,found_count,start_time
-    if first_run==0:
+    global first_run, notfound_count, found_count, start_time, frame_counter, fps
+
+    if first_run == 0:
         print("First run of lander!!")
-        first_run=1
-        start_time=time.time()
-    
-    
+        first_run = 1
+        start_time = time.time()
+
     img = cv2.imdecode(np.frombuffer(frame, dtype=np.uint8), cv2.IMREAD_COLOR)
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     corners, ids, rejected = cv2.aruco.detectMarkers(gray, aruco_dict, parameters=parameters)
 
-    #if ids is not None:
-        #cv2.aruco.drawDetectedMarkers(img, corners, ids)
     try:
         if ids is not None:
             ret = cv2.aruco.estimatePoseSingleMarkers(corners, 0.1, cameraMatrix, distCoeffs)
@@ -92,21 +92,23 @@ def lander(frame):
 
             print("X CENTER PIXEL: " + str(x_avg) + " Y CENTER PIXEL: " + str(y_avg))
             print("MARKER POSITION: x=" + x + " y= " + y + " z=" + z)
-            found_count=found_count+1
-            print("Found count", found_count)
+            found_count = found_count + 1
         else:
-            notfound_count = notfound_count+1
+            notfound_count = notfound_count + 1
 
     except Exception as e:
-        print('Target likely not found. Error: '+str(e))
-        notfound_count=notfound_count+1
+        print('Target likely not found. Error: ' + str(e))
+        notfound_count = notfound_count + 1
 
     _, jpeg_frame = cv2.imencode('.JPEG', img)
+    frame_counter += 1
     return jpeg_frame.tobytes()
 
 
 class StreamingHandler(server.BaseHTTPRequestHandler):
     def do_GET(self):
+        global fps, frame_counter, start_time
+
         if self.path == '/':
             self.send_response(301)
             self.send_header('Location', '/index.html')
@@ -131,12 +133,7 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
                         output.condition.wait()
                         frame = output.frame
                     processed_frame = lander(frame)
-                    end_time=time.time()
-                    total_time=end_time-start_time
-                    total_time=abs(int(total_time))
-                    total_count=found_count+notfound_count
-                    freq_lander=total_count/total_time
-                    print("lander function had frequency of: "+str(freq_lander))
+                    self.update_fps()
                     self.wfile.write(b'--FRAME\r\n')
                     self.send_header('Content-Type', 'image/jpeg')
                     self.send_header('Content-Length', len(processed_frame))
@@ -151,6 +148,15 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
         else:
             self.send_error(404)
             self.end_headers()
+
+    def update_fps(self):
+        global fps, frame_counter, start_time
+        elapsed_time = time.time() - start_time
+        if elapsed_time > 1:
+            fps = frame_counter / elapsed_time
+            print(f"FPS: {fps}")
+            frame_counter = 0
+            start_time = time.time()
 
 
 class StreamingServer(socketserver.ThreadingMixIn, server.HTTPServer):
@@ -168,6 +174,5 @@ picam2.start_recording(JpegEncoder(), FileOutput(output))
 try:
     address = ('', 8000)
     server = StreamingServer(address, StreamingHandler)
-    server.serve_forever()
 finally:
     picam2.stop_recording()
