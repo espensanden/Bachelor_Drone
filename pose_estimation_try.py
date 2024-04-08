@@ -13,7 +13,7 @@ import time
 
 found_count = 0
 not_found_count = 0
-
+first_run = 0
 
 
 
