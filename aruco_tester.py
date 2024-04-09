@@ -8,7 +8,18 @@ import time
 import os
 import platform
 import sys
+from picamera2 import Picamera2
+from picamera2.encoders import JpegEncoder
+from picamera2.outputs import FileOutput
 #############################
+
+cv2.startWindowThread()
+picam2 = Picamera2()
+picam2.configure(picam2.create_preview_configuration(main={"format": 'XRGB8888', "size": (640, 480)}))
+picam2.start()
+
+
+
 
 width=640
 height=480
