@@ -114,8 +114,8 @@ if now_landing == 0:
     total_time=end_time-start_time
     total_time=abs(int(total_time))
     print("Drone is landing!!")
-    if found_count > 150:
-        vehicle_land == False
+    if found_count > 100:
+        vehicle_land = False
 
     total_count=found_count+notfound_count
     freq_lander=total_count/total_time
