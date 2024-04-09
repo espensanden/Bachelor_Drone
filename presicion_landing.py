@@ -50,6 +50,7 @@ vehicle_land = True
 
 def landing_drone():
     #while True:
+    global first_run, notfound_count, found_count, aruco_marker_size, start_time
     if first_run==0:
         print("First run of lander!!")
         first_run=1
