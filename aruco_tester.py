@@ -103,5 +103,5 @@ if viewVideo==False:
     else:
         print("Performance likely not good enough for precision landing.")
         print("Check if the Pi is too hot")
-    print("---------------------------")
+    print("")
 cv2.destroyAllWindows()
