@@ -1,6 +1,14 @@
 import cv2
 import numpy as np
 import math
+from picamera2 import Picamera2
+
+picam2 = Picamera2()
+picam2.preview_configuration.main.size = (1280,720)
+picam2.preview_configuration.main.format = "RGB888"
+picam2.preview_configuration.align()
+picam2.configure("preview")
+picam2.start()
 
 cameraMatrix = np.array([[774.5585769798772, 0.0, 619.694166336029],
                          [0.0, 772.9641015632712, 352.49790332793935],
@@ -17,20 +25,19 @@ vertical_res = 480
 horizontal_fov = 62.2 * (math.pi / 180 )  # Pi cam V2: 62.2
 vertical_fov = 48.8 * (math.pi / 180)     # Pi cam V2: 48.8
 
-cap = cv2.VideoCapture(0, cv2.CAP_V4L2)  # Open the default camera (index 0)
 
 while True:
-    ret, frame = cap.read()  # Read a frame from the camera
+    im = picam2.capture_array()
 
     if not ret:
         print("Failed to capture frame")
         break
 
-    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    gray = cv2.cvtColor(im, cv2.COLOR_BGR2GRAY)
     corners, ids, _ = cv2.aruco.detectMarkers(gray, aruco_dict, parameters=parameters)
 
     if ids is not None:
-        cv2.aruco.drawDetectedMarkers(frame, corners, ids)
+        cv2.aruco.drawDetectedMarkers(im, corners, ids)
 
         for i in range(len(ids)):
             ret = cv2.aruco.estimatePoseSingleMarkers(corners[i], 0.1, cameraMatrix, distCoeffs)
@@ -52,10 +59,10 @@ while True:
             print("Marker ID:", ids[i], "Position: x =", x, "y =", y, "z =", z)
             print("Center Pixel: x =", x_avg, "y =", y_avg)
 
-    cv2.imshow('Frame', frame)  # Display the frame
+    cv2.imshow('Frame', im)  # Display the frame
 
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
-cap.release()  # Release the capture object
+im.release()  # Release the capture object
 cv2.destroyAllWindows()  # Close all OpenCV windows
