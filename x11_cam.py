@@ -35,11 +35,8 @@ vertical_fov = 48.8 * (math.pi / 180)     # Pi cam V2: 48.8
 def landing_drone():
     while True:
         im = picam2.capture_array()
-        frame_np = np.array(im)
-        #if not ret:
-            #print("Failed to capture frame")
-            #break
-
+        frame = cv2.resize(im,(horizontal_res,vertical_res))
+        frame_np = np.array(frame)
         gray = cv2.cvtColor(frame_np, cv2.COLOR_BGR2GRAY)
         ids = ''
         corners, ids, _ = cv2.aruco.detectMarkers(gray, aruco_dict, parameters=parameters)
