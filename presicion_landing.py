@@ -46,9 +46,9 @@ parameters = cv2.aruco.DetectorParameters_create()
 seconds=0
 if viewVideo==True:
     seconds=1000000
-    print("Showing video feed if X11 enabled.")
-    print("Script will run until you exit.")
-    print("-------------------------------")
+    print("Showing video feed if X11 is enabled.")
+    print("Script will run until exit.")
+    print("")
     print("")
 else:
     seconds=5
