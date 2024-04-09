@@ -26,13 +26,7 @@ PAGE = """\
 horizontal_res = 640
 vertical_res = 480
 
-# Initialize Picamera
-picam2 = Picamera2()
-picam2.configure(picam2.create_video_configuration(main={"size": (horizontal_res, vertical_res)}))
-output = StreamingOutput()
-picam2.hflip = True
-picam2.vflip = True
-picam2.start_recording(JpegEncoder(), FileOutput(output))
+
 
 # Create a streaming output class
 class StreamingOutput(io.BufferedIOBase):
@@ -94,6 +88,15 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
 class StreamingServer(socketserver.ThreadingMixIn, server.HTTPServer):
     allow_reuse_address = True
     daemon_threads = True
+
+
+# Initialize Picamera
+picam2 = Picamera2()
+picam2.configure(picam2.create_video_configuration(main={"size": (horizontal_res, vertical_res)}))
+output = StreamingOutput()
+picam2.hflip = True
+picam2.vflip = True
+picam2.start_recording(JpegEncoder(), FileOutput(output))
 
 # Start the streaming server
 try:
