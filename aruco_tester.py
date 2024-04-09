@@ -59,8 +59,8 @@ while time.time()-start_time<seconds:
     im = picam2.capture_array()
 #    frame = cv2.resize(frame,(width,height))
     
-    frame_np = np.array(im)
-    gray_img = cv2.cvtColor(frame_np,cv2.COLOR_BGR2GRAY)
+    #frame_np = np.array(im)
+    gray_img = cv2.cvtColor(im,cv2.COLOR_BGR2GRAY)
     ids=''
     corners, ids, rejected = aruco.detectMarkers(image=gray_img,dictionary=aruco_dict,parameters=parameters)
     if ids is not None:
