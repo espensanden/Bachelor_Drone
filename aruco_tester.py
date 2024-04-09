@@ -13,9 +13,15 @@ from picamera2.encoders import JpegEncoder
 from picamera2.outputs import FileOutput
 #############################
 
+horizontal_res = 640
+vertical_res = 480
+
+
 cv2.startWindowThread()
 picam2 = Picamera2()
-picam2.configure(picam2.create_preview_configuration(main={"format": 'XRGB8888', "size": (640, 480)}))
+picam2.preview_configuration.main.size = (horizontal_res,vertical_res)
+picam2.preview_configuration.main.format = "RGB888"
+picam2.preview_configuration.align()
 picam2.start()
 
 
