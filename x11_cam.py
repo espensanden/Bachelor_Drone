@@ -29,9 +29,9 @@ vertical_fov = 48.8 * (math.pi / 180)     # Pi cam V2: 48.8
 while True:
     im = picam2.capture_array()
 
-    if not ret:
-        print("Failed to capture frame")
-        break
+    #if not ret:
+        #print("Failed to capture frame")
+        #break
 
     gray = cv2.cvtColor(im, cv2.COLOR_BGR2GRAY)
     corners, ids, _ = cv2.aruco.detectMarkers(gray, aruco_dict, parameters=parameters)
