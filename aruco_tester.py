@@ -19,16 +19,19 @@ if len(sys.argv)>1:
     if viewVideo=='0' or viewVideo=='False' or viewVideo=='false':
         viewVideo=False
 ############ARUCO/CV2############
-id_to_find=72
+id_to_find=0
 marker_size=20 #cm
 
 realWorldEfficiency=.7 ##Iterations/second are slower when the drone is flying. This accounts for that
-aruco_dict = aruco.getPredefinedDictionary(aruco.DICT_ARUCO_ORIGINAL)
-parameters = aruco.DetectorParameters_create()
 
-calib_path="/home/pi/video2calibration/calibrationFiles/"
-cameraMatrix   = np.loadtxt(calib_path+'cameraMatrix.txt', delimiter=',')
-cameraDistortion   = np.loadtxt(calib_path+'cameraDistortion.txt', delimiter=',')
+cameraMatrix = np.array([[774.5585769798772, 0.0, 619.694166336029],
+                         [0.0, 772.9641015632712, 352.49790332793935],
+                         [0.0, 0.0, 1.0]])
+distCoeffs = np.array([-0.3653858593342419, 0.1632243853386151, -0.002671633309837953, 0.00033826189145571927,
+                       -0.038171194766151724])
+
+aruco_dict = cv2.aruco.Dictionary_get(cv2.aruco.DICT_4X4_50)
+parameters = cv2.aruco.DetectorParameters_create()
 #############################
 
 seconds=0
@@ -57,7 +60,7 @@ while time.time()-start_time<seconds:
         print("Found these IDs in the frame:")
         print(ids)
     if ids is not None and ids[0] == id_to_find:
-        ret = aruco.estimatePoseSingleMarkers(corners,marker_size,cameraMatrix=cameraMatrix,distCoeffs=cameraDistortion)
+        ret = aruco.estimatePoseSingleMarkers(corners,marker_size,cameraMatrix=cameraMatrix,distCoeffs=distCoeffs)
         rvec,tvec = ret[0][0,0,:], ret[1][0,0,:]
         x="{:.2f}".format(tvec[0])
         y="{:.2f}".format(tvec[1])
@@ -68,7 +71,7 @@ while time.time()-start_time<seconds:
         print("")
         if viewVideo==True:
             aruco.drawDetectedMarkers(frame_np,corners)
-            aruco.drawAxis(frame_np,cameraMatrix,cameraDistortion,rvec,tvec,10)
+            aruco.drawAxis(frame_np,cameraMatrix,distCoeffs,rvec,tvec,10)
             cv2.imshow('frame',frame_np)
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
