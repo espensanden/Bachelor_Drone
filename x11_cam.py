@@ -34,9 +34,8 @@ vertical_fov = 48.8 * (math.pi / 180)     # Pi cam V2: 48.8
 
 def landing_drone():
     while True:
-        im = picam2.capture()
-        frame = im.read()
-        frame_np = np.array(frame)
+        im = picam2.capture_array()
+        frame_np = np.array(im)
         #if not ret:
             #print("Failed to capture frame")
             #break
