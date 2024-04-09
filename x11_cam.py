@@ -24,16 +24,15 @@ picam2.preview_configuration.main.format = "RGB888"
 picam2.preview_configuration.align()
 picam2.configure("preview")
 picam2.start()
-im = picam2.capture_array()
+
 
 horizontal_fov = 62.2 * (math.pi / 180 )  # Pi cam V2: 62.2
 vertical_fov = 48.8 * (math.pi / 180)     # Pi cam V2: 48.8
 
 
 while True:
-    frame = im.read()
-    frame = cv2.resize(frame, (horizontal_res, vertical_res))
-    frame_np = np.array(frame)
+    im = picam2.capture_array()
+    frame_np = np.array(im)
     #if not ret:
         #print("Failed to capture frame")
         #break
