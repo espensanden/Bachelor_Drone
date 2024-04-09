@@ -26,7 +26,7 @@ picam2.start()
 
 
 #cap = cv2.VideoCapture(0, cv2.CAP_V4L2)
-viewVideo=True
+viewVideo=False
 if len(sys.argv)>1:
     viewVideo=sys.argv[1]
     if viewVideo=='0' or viewVideo=='False' or viewVideo=='false':
