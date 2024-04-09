@@ -41,7 +41,7 @@ while True:
 
         for i in range(len(ids)):
             ret = cv2.aruco.estimatePoseSingleMarkers(corners[i], 0.1, cameraMatrix, distCoeffs)
-            rvec, tvec = ret[0][0, :], ret[1][0, :]
+            (rvec, tvec) = (ret[0][0, 0, :], ret[1][0, 0, :])
 
             x = '{:.2f}'.format(tvec[0])
             y = '{:.2f}'.format(tvec[1])
