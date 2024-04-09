@@ -27,7 +27,7 @@ if len(sys.argv)>1:
         viewVideo=False
 ############ARUCO/CV2############
 id_to_find=0
-marker_size=20 #cm
+marker_size=10 #cm
 
 realWorldEfficiency=.7 ##Iterations/second are slower when the drone is flying. This accounts for that
 
@@ -59,8 +59,8 @@ while time.time()-start_time<seconds:
     im = picam2.capture_array()
 #    frame = cv2.resize(frame,(width,height))
     
-    #frame_np = np.array(im)
-    gray_img = cv2.cvtColor(im,cv2.COLOR_BGR2GRAY)
+    frame_np = np.array(im)
+    gray_img = cv2.cvtColor(frame_np,cv2.COLOR_BGR2GRAY)
     ids=''
     corners, ids, rejected = aruco.detectMarkers(image=gray_img,dictionary=aruco_dict,parameters=parameters)
     if ids is not None:
@@ -77,8 +77,8 @@ while time.time()-start_time<seconds:
         print(marker_position)
         print("")
         if viewVideo==True:
-            aruco.drawDetectedMarkers(im,corners)
-            aruco.drawAxis(im,cameraMatrix,distCoeffs,rvec,tvec,10)
+            aruco.drawDetectedMarkers(frame_np,corners)
+            aruco.drawAxis(frame_np,cameraMatrix,distCoeffs,rvec,tvec,10)
             cv2.imshow('frame',im)
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
