@@ -22,7 +22,7 @@ PAGE = """\
 </html>
 """
 
-cameraMatrix = np.array([[774.5585769798772, 0.0, 619.694166336029],
+"""cameraMatrix = np.array([[774.5585769798772, 0.0, 619.694166336029],
                          [0.0, 772.9641015632712, 352.49790332793935],
                          [0.0, 0.0, 1.0]])
 distCoeffs = np.array([-0.3653858593342419, 0.1632243853386151, -0.002671633309837953, 0.00033826189145571927,
@@ -35,7 +35,7 @@ horizontal_res = 640
 vertical_res = 480
 
 horizontal_fov = 62.2 * (math.pi / 180 ) ##Pi cam V1: 53.5 V2: 62.2
-vertical_fov = 48.8 * (math.pi / 180)    ##Pi cam V1: 41.41 V2: 48.8
+vertical_fov = 48.8 * (math.pi / 180)    ##Pi cam V1: 41.41 V2: 48.8"""
 
 class StreamingOutput(io.BufferedIOBase):
     def __init__(self):

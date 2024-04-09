@@ -3,6 +3,15 @@ import numpy as np
 import math
 from picamera2 import Picamera2
 
+
+
+
+
+
+
+
+
+
 id_to_find = 0
 aruco_marker_size = 10 #in cm
 
