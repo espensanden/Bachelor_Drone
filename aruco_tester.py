@@ -53,7 +53,7 @@ while time.time()-start_time<seconds:
 #    frame = cv2.resize(frame,(width,height))
     
     frame_np = np.array(frame)
-    gray_img = cv2.cvtColor(frame_np,cv2.COLOR_BGR2GRAY)
+    gray_img = cv2.cvtColor(cv2.UMat(frame_np),cv2.COLOR_BGR2GRAY)
     ids=''
     corners, ids, rejected = aruco.detectMarkers(image=gray_img,dictionary=aruco_dict,parameters=parameters)
     if ids is not None:
