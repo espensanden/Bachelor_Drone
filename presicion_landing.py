@@ -77,7 +77,7 @@ def landing_drone():
         #break
 
     #im.release()  # Release the capture object
-    cv2.destroyAllWindows()  # Close all OpenCV windows
+    #cv2.destroyAllWindows()  # Close all OpenCV windows
 
 
 if now_landing == 0:
