@@ -4,7 +4,7 @@ import math
 from picamera2 import Picamera2
 
 id_to_find = 0
-marker_size = 10 #in cm
+aruco_marker_size = 10 #in cm
 
 now_landing = 0
 
@@ -35,14 +35,13 @@ vertical_fov = 48.8 * (math.pi / 180)     # Pi cam V2: 48.8
 def landing_drone():
     while True:
         im = picam2.capture_array()
-        frame_np = np.array(im)
-        gray = cv2.cvtColor(frame_np, cv2.COLOR_BGR2GRAY)
+        gray = cv2.cvtColor(im, cv2.COLOR_BGR2GRAY)
         ids = ''
         corners, ids, _ = cv2.aruco.detectMarkers(gray, aruco_dict, parameters=parameters)
         
         try:
             if ids is not None and ids[0] == id_to_find:
-                ret  = cv2.aruco.estimatePoseSingleMarkers(corners, 0.1, cameraMatrix, distCoeffs)
+                ret  = cv2.aruco.estimatePoseSingleMarkers(corners, aruco_marker_size, cameraMatrix, distCoeffs)
                 (rvec, tvec) = (ret[0][0, 0, :], ret[1][0, 0, :])
                         
                 x = '{:.2f}'.format(tvec[0])
@@ -63,8 +62,10 @@ def landing_drone():
                 y_ang = (y_avg - vertical_res*.5)*(vertical_fov/vertical_res)
 
 
-                print("X CENTER PIXEL: "+str(x_avg)+" Y CENTER PIXEL: "+str(y_avg))
-                print("MARKER POSITION: x="+x+" y= "+y+" z="+z)
+                
+
+                print("x centre pixel: "+str(x_avg)+" y centre pixel: "+str(y_avg))
+                print("Marker position: x="+x+" y= "+y+" z="+z)
         except Exception as e:
             print('Target likely not found. Error: '+str(e))
 
