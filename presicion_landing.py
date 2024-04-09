@@ -76,7 +76,7 @@ def landing_drone():
     #if cv2.waitKey(1) & 0xFF == ord('q'):
         #break
 
-    im.release()  # Release the capture object
+    #im.release()  # Release the capture object
     cv2.destroyAllWindows()  # Close all OpenCV windows
 
 
