@@ -18,8 +18,8 @@ aruco_dict = cv2.aruco.Dictionary_get(cv2.aruco.DICT_4X4_50)
 parameters = cv2.aruco.DetectorParameters_create()
 
 #Camera
-horizontal_res = 360
-vertical_res = 180
+horizontal_res = 640
+vertical_res = 480
 picam2 = Picamera2()
 picam2.preview_configuration.main.size = (horizontal_res,vertical_res)
 picam2.preview_configuration.main.format = "RGB888"
