@@ -77,8 +77,8 @@ while time.time()-start_time<seconds:
         print(marker_position)
         print("")
         if viewVideo==True:
-            aruco.drawDetectedMarkers(frame_np,corners, ids)
-            aruco.drawAxis(frame_np,cameraMatrix,distCoeffs,rvec,tvec,10)
+            aruco.drawDetectedMarkers(im,corners, ids)
+            aruco.drawAxis(im,cameraMatrix,distCoeffs,rvec,tvec,10)
             cv2.imshow('frame',im)
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
