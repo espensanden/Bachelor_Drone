@@ -19,11 +19,7 @@ picam2.configure(picam2.create_preview_configuration(main={"format": 'XRGB8888',
 picam2.start()
 
 
-
-
-width=640
-height=480
-cap = cv2.VideoCapture(0, cv2.CAP_V4L2)
+#cap = cv2.VideoCapture(0, cv2.CAP_V4L2)
 viewVideo=True
 if len(sys.argv)>1:
     viewVideo=sys.argv[1]
@@ -59,12 +55,12 @@ counter=float(counter)
 
 start_time=time.time()
 while time.time()-start_time<seconds:
-    frame = cap.read() #for Threaded webcam
-    
+    #frame = cap.read() #for Threaded webcam
+    im = picam2.capture_array()
 #    frame = cv2.resize(frame,(width,height))
     
-    frame_np = np.array(frame)
-    gray_img = cv2.cvtColor(frame_np,cv2.COLOR_BGR2GRAY)
+    #frame_np = np.array(im)
+    gray_img = cv2.cvtColor(im,cv2.COLOR_BGR2GRAY)
     ids=''
     corners, ids, rejected = aruco.detectMarkers(image=gray_img,dictionary=aruco_dict,parameters=parameters)
     if ids is not None:
