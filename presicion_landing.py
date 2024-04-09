@@ -116,13 +116,14 @@ if now_landing == 0:
     print("Drone is landing!!")
     if found_count > 100:
         vehicle_land = False
+        now_landing = 1
 
-    total_count=found_count+notfound_count
-    freq_lander=total_count/total_time
-    print("Total iterations: "+str(total_count))
-    print("Total seconds: "+str(total_time))
-    print("------------------")
-    print("lander function had frequency of: "+str(freq_lander))
-    print("------------------")
-    print("Vehicle has landed")
-    print("------------------")
+total_count=found_count+notfound_count
+freq_lander=total_count/total_time
+print("Total iterations: "+str(total_count))
+print("Total seconds: "+str(total_time))
+print("------------------")
+print("lander function had frequency of: "+str(freq_lander))
+print("------------------")
+print("Vehicle has landed")
+print("------------------")
