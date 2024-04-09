@@ -123,7 +123,7 @@ freq_lander=total_count/total_time
 print("Total iterations: "+str(total_count))
 print("Total seconds: "+str(total_time))
 print("------------------")
-print("lander function had frequency of: "+str(freq_lander))
+print("Landing_drone function had frequency of: "+str(freq_lander))
 print("------------------")
 print("Vehicle has landed")
 print("------------------")
