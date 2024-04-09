@@ -2,13 +2,18 @@ import cv2
 import numpy as np
 import math
 from picamera2 import Picamera2
+import time
 
 
 
+first_run = 0
+start_time = 0
+start_time=0
+end_time=0
 
 
-
-
+found_count=0
+notfound_count=0
 
 
 
@@ -45,6 +50,10 @@ vehicle_land = True
 
 def landing_drone():
     #while True:
+    if first_run==0:
+        print("First run of lander!!")
+        first_run=1
+        start_time=time.time()
     im = picam2.capture_array()
     gray = cv2.cvtColor(im, cv2.COLOR_BGR2GRAY)
     ids = ''
@@ -77,9 +86,15 @@ def landing_drone():
 
             print("x centre pixel: "+str(x_avg)+" y centre pixel: "+str(y_avg))
             print("Marker position: x="+x+" y= "+y+" z="+z)
+            found_count=found_count+1
+            print("")
+
+        else:
+            notfound_count=notfound_count+1
+
     except Exception as e:
         print('Target likely not found. Error: '+str(e))
-
+        notfound_count=notfound_count+1
     #cv2.imshow('Frame', im)  # Display the frame
 
     #if cv2.waitKey(1) & 0xFF == ord('q'):
@@ -94,4 +109,17 @@ def landing_drone():
 if now_landing == 0:
     while vehicle_land == True:
         landing_drone()
-        print("Drone is landing!!")
+    end_time=time.time()
+    total_time=end_time-start_time
+    total_time=abs(int(total_time))
+    print("Drone is landing!!")
+
+    total_count=found_count+notfound_count
+    freq_lander=total_count/total_time
+    print("Total iterations: "+str(total_count))
+    print("Total seconds: "+str(total_time))
+    print("------------------")
+    print("lander function had frequency of: "+str(freq_lander))
+    print("------------------")
+    print("Vehicle has landed")
+    print("------------------")
