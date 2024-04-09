@@ -12,7 +12,7 @@ import sys
 
 width=640
 height=480
-cap = WebcamVideoStream(src=0, height=height, width=width).start()
+cap = WebcamVideoStream(src=0).start()
 viewVideo=True
 if len(sys.argv)>1:
     viewVideo=sys.argv[1]
