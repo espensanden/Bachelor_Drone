@@ -40,24 +40,29 @@ while True:
         cv2.aruco.drawDetectedMarkers(im, corners, ids)
 
         for i in range(len(ids)):
-            ret = cv2.aruco.estimatePoseSingleMarkers(corners[i], 0.1, cameraMatrix, distCoeffs)
+            ret  = cv2.aruco.estimatePoseSingleMarkers(corners, 0.1, cameraMatrix, distCoeffs)
             (rvec, tvec) = (ret[0][0, 0, :], ret[1][0, 0, :])
-
+                    
             x = '{:.2f}'.format(tvec[0])
             y = '{:.2f}'.format(tvec[1])
             z = '{:.2f}'.format(tvec[2])
 
-            x_sum = np.sum(corners[i][0][:, 0])
-            y_sum = np.sum(corners[i][0][:, 1])
+            y_sum = 0
+            x_sum = 0
 
-            x_avg = x_sum * 0.25
-            y_avg = y_sum * 0.25
+            x_sum = corners[0][0][0][0]+ corners[0][0][1][0]+ corners[0][0][2][0]+ corners[0][0][3][0]
+            y_sum = corners[0][0][0][1]+ corners[0][0][1][1]+ corners[0][0][2][1]+ corners[0][0][3][1]
 
-            x_ang = (x_avg - horizontal_res * 0.5) * (horizontal_fov / horizontal_res)
-            y_ang = (y_avg - vertical_res * 0.5) * (vertical_fov / vertical_res)
 
-            print("Marker ID:", ids[i], "Position: x =", x, "y =", y, "z =", z)
-            print("Center Pixel: x =", x_avg, "y =", y_avg)
+            x_avg = x_sum*.25
+            y_avg = y_sum*.25
+
+            x_ang = (x_avg - horizontal_res*.5)*(horizontal_fov/horizontal_res)
+            y_ang = (y_avg - vertical_res*.5)*(vertical_fov/vertical_res)
+
+
+            print("X CENTER PIXEL: "+str(x_avg)+" Y CENTER PIXEL: "+str(y_avg))
+            print("MARKER POSITION: x="+x+" y= "+y+" z="+z)
 
     cv2.imshow('Frame', im)  # Display the frame
 
