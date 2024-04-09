@@ -18,14 +18,6 @@ PAGE = """\
 </html>
 """
 
-# Configure camera and streaming output
-horizontal_res = 640
-vertical_res = 480
-
-picam2 = Picamera2()
-picam2.configure(picam2.create_video_configuration(main={"size": (horizontal_res, vertical_res)}))
-output = FileOutput(picam2)
-picam2.start_recording(JpegEncoder(), output)
 
 class StreamingOutput(io.BufferedIOBase):
     def __init__(self):
@@ -77,6 +69,15 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
 class StreamingServer(socketserver.ThreadingMixIn, server.HTTPServer):
     allow_reuse_address = True
     daemon_threads = True
+
+
+picam2 = Picamera2()
+picam2.configure(picam2.create_video_configuration(main={"size": (640, 480)}))
+output = StreamingOutput()
+picam2.hflip = True
+picam2.vflip = True
+picam2.start_recording(JpegEncoder(), FileOutput(output))
+
 
 def run_server():
     try:

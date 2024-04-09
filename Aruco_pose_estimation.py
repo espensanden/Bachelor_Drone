@@ -69,46 +69,6 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
             self.end_headers()
             try:
                 while True:
-                    with output.condition:
-                        output.condition.wait()
-                        frame = output.frame
-                    np_frame = np.frombuffer(frame, dtype=np.uint8)
-                    img = cv2.imdecode(np_frame, cv2.IMREAD_COLOR)
-
-                    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-                    corners, ids, rejected = cv2.aruco.detectMarkers(gray, aruco_dict, parameters=parameters)
-
-                    if ids is not None:
-                        cv2.aruco.drawDetectedMarkers(img, corners, ids)
-
-                    if ids is not None:
-                        ret  = cv2.aruco.estimatePoseSingleMarkers(corners, 0.1, cameraMatrix, distCoeffs)
-                        (rvec, tvec) = (ret[0][0, 0, :], ret[1][0, 0, :])
-                            
-                        x = '{:.2f}'.format(tvec[0])
-                        y = '{:.2f}'.format(tvec[1])
-                        z = '{:.2f}'.format(tvec[2])
-
-                        y_sum = 0
-                        x_sum = 0
-            
-                        x_sum = corners[0][0][0][0]+ corners[0][0][1][0]+ corners[0][0][2][0]+ corners[0][0][3][0]
-                        y_sum = corners[0][0][0][1]+ corners[0][0][1][1]+ corners[0][0][2][1]+ corners[0][0][3][1]
-
-
-                        x_avg = x_sum*.25
-                        y_avg = y_sum*.25
-            
-                        x_ang = (x_avg - horizontal_res*.5)*(horizontal_fov/horizontal_res)
-                        y_ang = (y_avg - vertical_res*.5)*(vertical_fov/vertical_res)
-
-
-                        print("X CENTER PIXEL: "+str(x_avg)+" Y CENTER PIXEL: "+str(y_avg))
-                        print("MARKER POSITION: x="+x+" y= "+y+" z="+z)
-
-
-
-                    _, frame = cv2.imencode('.JPEG', img)
                     self.wfile.write(b'--FRAME\r\n')
                     self.send_header('Content-Type', 'image/jpeg')
                     self.send_header('Content-Length', len(frame))
