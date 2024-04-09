@@ -27,9 +27,11 @@ picam2.preview_configuration.align()
 picam2.configure("preview")
 picam2.start()
 
+#Camera FOV
+horizontal_fov = 62.2 * (math.pi / 180 )
+vertical_fov = 48.8 * (math.pi / 180)
 
-horizontal_fov = 62.2 * (math.pi / 180 )  # Pi cam V2: 62.2
-vertical_fov = 48.8 * (math.pi / 180)     # Pi cam V2: 48.8
+vehicle_land = True
 
 
 def landing_drone():
@@ -79,5 +81,6 @@ def landing_drone():
 
 
 if now_landing == 0:
-    landing_drone()
-    print("Drone is landing!!")
+    while vehicle_land == True:
+        landing_drone()
+        print("Drone is landing!!")
