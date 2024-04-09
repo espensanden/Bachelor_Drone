@@ -17,7 +17,7 @@ vertical_res = 480
 horizontal_fov = 62.2 * (math.pi / 180 )  # Pi cam V2: 62.2
 vertical_fov = 48.8 * (math.pi / 180)     # Pi cam V2: 48.8
 
-cap = cv2.VideoCapture(0)  # Open the default camera (index 0)
+cap = cv2.VideoCapture(0, cv2.CAP_V4L2)  # Open the default camera (index 0)
 
 while True:
     ret, frame = cap.read()  # Read a frame from the camera
