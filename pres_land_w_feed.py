@@ -99,13 +99,13 @@ def landing_drone():
     except Exception as e:
         print('Target likely not found. Error: '+str(e))
         notfound_count=notfound_count+1
-    #cv2.imshow('Frame', im)  # Display the frame
+    cv2.imshow('Frame', im)  # Display the frame
 
-    #if cv2.waitKey(1) & 0xFF == ord('q'):
+    if cv2.waitKey(1) & 0xFF == ord('q'):
         #break
 
-    #im.release()  # Release the capture object
-    #cv2.destroyAllWindows()  # Close all OpenCV windows
+        im.release()  # Release the capture object
+    cv2.destroyAllWindows()  # Close all OpenCV windows
 
 
 
