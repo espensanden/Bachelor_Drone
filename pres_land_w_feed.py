@@ -96,7 +96,7 @@ def landing_drone():
     if cv2.waitKey(1) & 0xFF == ord('q'):
         vehicle_land = False
 
-    im.release()  # Release the capture object
+    #im.release()  # Release the capture object
 
 
 if __name__ == "__main__":
