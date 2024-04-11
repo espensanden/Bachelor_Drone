@@ -21,7 +21,7 @@ def connectMyCopter():
 def arm():
     while vehicle.is_armable == False:
         print("Waiting for vehicle to become armable...")
-        time.sleep()
+        time.sleep(1)
     print("Yo, the vehicle is now armable.")
     print("")
 
