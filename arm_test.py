@@ -20,6 +20,9 @@ def connectMyCopter():
 
 def arm():
     while vehicle.is_armable == False:
+        print("Vehicle status: ", vehicle.system_status)
+        print("GPS: ", vehicle.gps_0)
+        print("EKF: ", vehicle.ekf_ok)
         print("Waiting for vehicle to become armable...")
         time.sleep(1)
     print("Yo, the vehicle is now armable.")
@@ -37,8 +40,6 @@ def arm():
 #################################################################3
 
 vehicle = connectMyCopter()
-print("Vehicle status: ", vehicle.system_status)
-print("GPS: ", vehicle.gps_0)
-print("EKF: ", vehicle.ekf_ok)
+
 arm()
 print("End of script")
