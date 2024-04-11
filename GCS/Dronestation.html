@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href = "station.css"></link>
+
+
+
+</head>
+<body>
+    <h1>blue</h1>
+    <h1>Control LED  via pc</h1>
+    <button onclick="sendCommand('CHARGING_PLATE_ON')">Turn On</button>
+    <button onclick="sendCommand('CHARGING_PLATE_OFF')">Turn Off</button>
+    <button onclick ="testComand()">test button</button>
+        
+            <div id="ToggleSwitch1">
+            <label class="switch" >
+            <input type="checkbox">
+            <span class="slider round" ></span>
+            <div class="switch-background"></div>
+            </label>
+            </div>
+
+            <div id="ToggleSwitch2">
+            <label class="switch" >
+            <input type="checkbox" name="checkboxPlate" value="true">
+ 
+            <span class="slider round"></span>
+            <div class="switch-background"></div>
+            </label>
+            </div>
+            <div class = "light-indicator">
+                <div class="light-indicator1">
+                    <div class="light-indicator-text"><h4>Indicator ligth 1</h4></div>
+                    <div class="light-indicator-background">
+                    <div class="light-indicator-circle" id="light-indicator1"></div>
+                </div>
+                </div>
+                <div class="light-indicator2">
+                    <div class="light-indicator-text"><h4>Charger plate</h4></div>
+                    <div class="light-indicator-background">
+                    <div class="light-indicator-circle" id="light-indicator2"></div>
+                    </div>
+                </div>
+                <div class="light-indicator3">
+                    <div class="light-indicator-text"><h4>Indicator ligth 3</h4></div>
+                    <div class="light-indicator-background">
+                    <div class="light-indicator-circle" id="light-indicator3"></div>
+                </div>
+                </div>
+            </div>
+            <div class="charger_voltage_plate">
+                <div><p id="charger-voltage-plate">Error</p></div>
+            </div>
+
+            <!--Battery state-->
+            <div class = "battery_space">
+                <div class = "battery_cell1">
+                    <div class="progress">
+                        <div class="progress_done1" data-done="50" id="battery_state_bar1">Error battery value</div>
+                    </div>
+                </div>
+                <div class = "battery_cell2">
+                    <div class="progress">
+                        <div class="progress_done2" data-done="50" id="battery_state_bar2">Error battery value</div>
+                    </div>
+                </div>
+                <div class = "battery_cell3">
+                    <div class="progress">
+                        <div class="progress_done3" data-done="50" id="battery_state_bar3">Error battery value</div>
+                    </div>
+                </div>
+                <div class = "battery_cell4">
+                    <div class="progress">
+                        <div class="progress_done4" data-done="50" id="battery_state_bar4">Error battery value</div>
+                    </div>
+                </div>
+                <div class = "battery_cell_side">
+                    <div class="progress_side">
+                        <div class="progress_done_side" data-done="50" id="battery_state_bar_side">Error battery value</div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+    <p class ="bottom" >made by group 12</p>
+    <script src = "main.js"> </script>
+</body>
+</html>
