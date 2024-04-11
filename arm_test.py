@@ -33,7 +33,7 @@ def arm():
         print("Waiting for drone to become armed..")
         time.sleep(1)
 
-    print("Vehicle is now armed.")
+    print("Vehicle is now armed!.")
     print("OMG  props are spinning. LOOK OUT.....")
     return None
 
