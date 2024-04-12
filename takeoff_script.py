@@ -54,6 +54,9 @@ def arm_and_takeoff(targetHeight):
 ############MAIN###############
 
 arm_and_takeoff(targetAltitude)
+
+time.sleep(3)
+
 vehicle.mode = VehicleMode("LAND")
 
 while vehicle.mode!='LAND':
