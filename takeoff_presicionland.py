@@ -7,11 +7,6 @@ from dronekit import connect, VehicleMode,LocationGlobal,LocationGlobalRelative
 from pymavlink import mavutil
 
 
-
-
-
-
-
 #Variables
 takeoff_height = 3
 velocity = 0.5
@@ -33,6 +28,7 @@ aruco_marker_size = 10 #in cm
 script_mode = 1
 ready_to_land = 0
 
+#Distortion Coefficients
 cameraMatrix = np.array([[774.5585769798772, 0.0, 619.694166336029],
                          [0.0, 772.9641015632712, 352.49790332793935],
                          [0.0, 0.0, 1.0]])
@@ -57,7 +53,12 @@ horizontal_fov = 62.2 * (math.pi / 180 )
 vertical_fov = 48.8 * (math.pi / 180)
 
 
+manualArm = False
+
+
+#Vehicle connect
 vehicle = connect('/dev/ttyAMA0',baud=57600,wait_ready=True)
+
 
 
 def arm_and_takeoff(targetHeight):
