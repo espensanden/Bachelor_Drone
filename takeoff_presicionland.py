@@ -192,6 +192,14 @@ def landing_drone():
 
 
 
+##SETUP PARAMETERS TO ENABLE PRECISION LANDING
+##
+vehicle.parameters['PLND_ENABLED'] = 1
+vehicle.parameters['PLND_TYPE'] = 1 ##1 for companion computer
+vehicle.parameters['PLND_EST_TYPE'] = 0 ##0 for raw sensor, 1 for kalman filter pos estimation
+vehicle.parameters['LAND_SPEED'] = 20 ##Descent speed of 30cm/s
+
+
 
 if script_mode == 1:
     arm_and_takeoff(takeoff_height)
@@ -202,17 +210,17 @@ if script_mode == 1:
 if ready_to_land == 1:
     while vehicle.armed == True:
         landing_drone()
-        end_time=time.time()
-        total_time=end_time-start_time
-        total_time=abs(int(total_time))
-        print("Drone is landing!!")
+    end_time=time.time()
+    total_time=end_time-start_time
+    total_time=abs(int(total_time))
+    print("Drone is landing!!")
 
-        total_count=found_count+notfound_count
-        freq_lander=total_count/total_time
-        print("Total iterations: "+str(total_count))
-        print("Total seconds: "+str(total_time))
-        print("*******************")
-        print("Landing_drone function had frequency of: "+str(freq_lander))
-        print("*******************")
-        print("Vehicle has landed")
-        print("*******************")
+    total_count=found_count+notfound_count
+    freq_lander=total_count/total_time
+    print("Total iterations: "+str(total_count))
+    print("Total seconds: "+str(total_time))
+    print("*******************")
+    print("Landing_drone function had frequency of: "+str(freq_lander))
+    print("*******************")
+    print("Vehicle has landed")
+    print("*******************")
