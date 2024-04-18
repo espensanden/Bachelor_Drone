@@ -67,7 +67,6 @@ while vehicle.mode!='LAND':
         print("Waiting for drone to land")
 print("Drone in land mode. Exiting script.")
 
-vehicle.close()
 
 
 
