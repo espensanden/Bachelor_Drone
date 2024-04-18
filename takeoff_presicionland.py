@@ -20,10 +20,10 @@ end_time=0
 found_count=0
 notfound_count=0
 
-targetAltitude=1
+targetAltitude=3
 
 id_to_find = 0
-aruco_marker_size = 10 #in cm
+aruco_marker_size = 17.5 #in cm
 
 script_mode = 1
 ready_to_land = 0
