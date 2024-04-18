@@ -7,7 +7,7 @@ from dronekit import connect, VehicleMode,LocationGlobal,LocationGlobalRelative
 from pymavlink import mavutil
 #############################
 
-targetAltitude=2
+targetAltitude=1.5
 manualArm=False
 ############DRONEKIT#################
 vehicle = connect('/dev/ttyAMA0',baud=57600,wait_ready=True)
