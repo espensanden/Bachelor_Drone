@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>RealSense Stream via WebSocket</title>
+</head>
+<body>
+    <h1>RealSense Camera Stream</h1>
+    <img id="videoFrame" src="" alt="Video Stream">
+    <div id="objectDetails"></div>
+    <script>
+        const socket = new WebSocket('ws://localhost:8765/');
+
+        socket.onmessage = function (event) {
+            let parts = event.data.split(';');
+            const imageElement = document.getElementById('videoFrame');
+            const detailsElement = document.getElementById('objectDetails');
+            
+            imageElement.src = 'data:image/jpeg;base64,' + parts[0];
+            detailsElement.textContent = parts[1];  // Display object details
+        };
+
+        socket.onerror = function (error) {
+            console.error('WebSocket error:', error);
+        };
+    </script>
+</body>
+</html>
