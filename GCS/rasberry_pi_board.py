@@ -31,7 +31,7 @@ def message_received(client, server, message):
     if message == "CHARGING_PLATE_ON":
         
         print ("plate is on")
-    elif message == 'BATTERY_STATS':
+    elif message == "BATTERY_STATS":
         server.send_message_to_all("rasbat")
         print("rasbat")    
     elif message == "CHARGING_PLATE_OFF":
