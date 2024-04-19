@@ -214,7 +214,7 @@ background-color: #4f21f3;
 .battery_voltage {
   position: relative;
   top: 80px;
-  left: 92px;
+  left: 86px;
 }
 .progress {
 	background-color: #8ebec7;
@@ -241,10 +241,7 @@ background-color: #4f21f3;
   left: 0px;
   top: 0px;
 }
-#battery-cell1{
-  color: #eeb947;
-  font-size: 20px;
-}
+
 .battery_cell2{
   
   position: absolute;

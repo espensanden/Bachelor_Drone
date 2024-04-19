@@ -7,7 +7,10 @@ import ADS1x15 #https://github.com/chandrawi/ADS1x15-ADC/blob/main/examples/ADS_
 ADS = ADS1x15.ADS1115(1, 0x48)
 
 ADS.setGain(ADS.PGA_4_096V)
-ads_to_voltage = 0.000621
+ads_to_voltage0 = 0.0006192
+ads_to_voltage1 = 0.000625
+ads_to_voltage2 = 0.000625
+ads_to_voltage3 = 0.000623
 def adc_read_voltage():
     val_0 = ADS.readADC(0)
     val_1 = ADS.readADC(1)
@@ -15,10 +18,10 @@ def adc_read_voltage():
     val_3 = ADS.readADC(3)
 
     analog_voltage = {
-        "BATTERY_VOLTAGE_CELL0:": round(val_0*ads_to_voltage, 1),
-        "BATTERY_VOLTAGE_CELL1:": round(val_1*ads_to_voltage, 1),
-        "BATTERY_VOLTAGE_CELL2:": round(val_2*ads_to_voltage, 1),
-        "BATTERY_VOLTAGE_CELL3:": round(val_3*ads_to_voltage, 1)
+        "BATTERY_VOLTAGE_CELL0:": round(val_0*ads_to_voltage0, 2),
+        "BATTERY_VOLTAGE_CELL1:": round(val_1*ads_to_voltage1, 2),
+        "BATTERY_VOLTAGE_CELL2:": round(val_2*ads_to_voltage2, 2),
+        "BATTERY_VOLTAGE_CELL3:": round(val_3*ads_to_voltage3, 2)
     }
     return analog_voltage
 

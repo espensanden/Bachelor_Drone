@@ -42,7 +42,25 @@ function messageWebSocketRas(ev){
   switch (ev.data) {
     case 'ras_say_the_plate_is_off':
       document.getElementById("light-indicator3").style.backgroundColor = "grey"; 
-
+      break;   
+    default:
+      console.log("");
+    if (ev.data.startsWith("BATTERY_VOLTAGE_CELL0:")){
+      var BATTERY_VOLTAGE_CELL0 = ev.data.split(":")[1];
+      document.getElementById("battery-cell1").innerHTML = BATTERY_VOLTAGE_CELL0 + "V";
+      }
+    else if (ev.data.startsWith("BATTERY_VOLTAGE_CELL1:")){
+      var BATTERY_VOLTAGE_CELL2 = ev.data.split(":")[1];
+      document.getElementById("battery-cell2").innerHTML = BATTERY_VOLTAGE_CELL2 + "V";
+      } 
+    else if (ev.data.startsWith("BATTERY_VOLTAGE_CELL2:")){
+      var BATTERY_VOLTAGE_CELL3 = ev.data.split(":")[1];
+      document.getElementById("battery-cell3").innerHTML = BATTERY_VOLTAGE_CELL3 + "V";
+      } 
+    else if (ev.data.startsWith("BATTERY_VOLTAGE_CELL3:")){
+      var BATTERY_VOLTAGE_CELL4 = ev.data.split(":")[1];
+      document.getElementById("battery-cell4").innerHTML = BATTERY_VOLTAGE_CELL4 + "V";
+      } 
 
   }
 }
@@ -81,25 +99,43 @@ function sendCommandPico(command) {
     webSocketPico.send(command);
 }
 
-//sender beskjed til raspberry
+
+//få opp kommunikasjon med Raspberry pi
 function sendCommandRas(command) {
-  console.log("Sending messageras", command);
-  switch(true){
-    case command.startsWith("BATTERY_VOLTAGE_CELL0:"):
-        var BATTERY_VOLTAGE_CELL0 = ev.data.split(":")[1];
-        document.getElementById("battery-cell1").innerHTML = BATTERY_VOLTAGE_CELL0 + "V";
-    }
-  
+  console.log("Sending message to Raspberry Pi:", command);
+
   webSocketRas.send(command);
 }
 
 
 
+/*
+//sender beskjed til raspberry
+function sendCommandRas(command) {
+  console.log("Sending messageras", command);
+
+  switch(true){
+    case command.startsWith("BATTERY_VOLTAGE_CELL0:"):
+        var BATTERY_VOLTAGE_CELL1 = ev.data.split(":")[1];
+        document.getElementById("battery-cell1").innerHTML = BATTERY_VOLTAGE_CELL1 + "V";
+    
+
+  }
+  if (command.startsWith("BATTERY_VOLTAGE_CELL0:")){
+    var BATTERY_VOLTAGE_CELL1 = command.split(":")[1];
+    document.getElementById("battery-cell1").innerHTML = BATTERY_VOLTAGE_CELL1 + "V";
+    console.log("dette funker")
+    }
+  webSocketRas.send(command);
+}
+*/
+
+
 function callBack(){
   document.getElementById("light-indicator1").style.backgroundColor = setButtonRandomColor();
   sendCommandPico(''); 
-  sendCommandRas('','');
-  sendCommandRas('BATTERY_STATS','')
+  //sendCommandRas('');
+  sendCommandRas('BATTERY_STATS')
 }
 setInterval(callBack, 1000)
 
