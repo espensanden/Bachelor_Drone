@@ -42,9 +42,6 @@ def send_message(server, message):
     server.send_message_to_all(message)
 
 
- 
-
-
 def run_server():
     server = WebsocketServer(host='192.168.1.169', port=8765, loglevel=logging.INFO)
     server.set_fn_new_client(new_client)

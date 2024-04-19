@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
             sendCommandRas('CHARGING_PLATE_ON')
         } else {
           sendCommandPico('CHARGING_PLATE_OFF'); 
-          sendCommandRas('CHARGING_PLATE_OFF')
+          sendCommandRas('CHARGING_PLATE_OFF');
         }
         
     });
@@ -82,8 +82,8 @@ function sendCommandPico(command) {
 
 //sender beskjed til raspberry
 function sendCommandRas(command) {
-  console.log("Sending messagerastest", command);
-  console.log("BATTERY_STATS", command);
+  console.log("Sending messageras", command);
+  sendCommandRas('BATTERY_STATS')
   
   webSocketRas.send(command);
 }
