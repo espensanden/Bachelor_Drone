@@ -20,30 +20,30 @@ def message_received(client, server, message):
         server.send_message_to_all("ras_say_the_plate_is_off")
         print ("plate is off")
 
-while True:
+def adc_read_voltage():
     val_0 = ADS.readADC(0)
     val_1 = ADS.readADC(1)
     val_2 = ADS.readADC(2)
     val_3 = ADS.readADC(3)
 
-    print("Analog0:", round(val_0*ads_to_voltage, 1),"V")
-    print("Analog1:", round(val_1*ads_to_voltage, 1),"V")
-    print("Analog2:", round(val_2*ads_to_voltage, 1),"V")
-    print("Analog3:", round(val_3*ads_to_voltage, 1),"V")
-    try:
-        server = WebsocketServer(host='192.168.1.169', port=8765, loglevel=logging.INFO)
-        server.set_fn_new_client(new_client)
-        server.set_fn_message_received(message_received)
-        server.run_forever()
-        val_0 = ADS.readADC(0)
-        val_1 = ADS.readADC(1)
-        val_2 = ADS.readADC(2)
-        val_3 = ADS.readADC(3)
+    analog_values = {
+        "Analog0:": round(val_0*ads_to_voltage, 1),
+        "Analog1:": round(val_1*ads_to_voltage, 1),
+        "Analog2:": round(val_2*ads_to_voltage, 1),
+        "Analog3:": round(val_3*ads_to_voltage, 1)
+    }
+    return analog_voltage
+ 
+server = WebsocketServer(host='192.168.1.169', port=8765, loglevel=logging.INFO)
+server.set_fn_new_client(new_client)
+server.set_fn_message_received(message_received)
 
-        print("Analog0:", round(val_0*ads_to_voltage, 1),"V")
-        print("Analog1:", round(val_1*ads_to_voltage, 1),"V")
-        print("Analog2:", round(val_2*ads_to_voltage, 1),"V")
-        print("Analog3:", round(val_3*ads_to_voltage, 1),"V")
-    except KeyboardInterrupt:
-        server.server_close()
-        break
+try:
+    server.run_forever()
+except KeyboardInterrupt:
+    server.server_close()
+
+while True:
+    analog_voltage = adc_read_voltage()
+    print(analog_voltage)
+    time.sleep(1)
