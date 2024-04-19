@@ -81,7 +81,7 @@ def landing_drone():
             found_count = found_count + 1
             print("")
 
-            if found_count >= 200:
+            if found_count >= 400:
                 vehicle_land = False
 
         else:

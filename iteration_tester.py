@@ -30,7 +30,7 @@ if len(sys.argv)>1:
 
 #OpenCV stuff
 id_to_find=0
-marker_size=10 #cm
+marker_size=17.5 #cm
 
 realWorldEfficiency=.7 ##Since the Iterations/second are slower when the drone is flying the effeciency will be lower when flying.
 
