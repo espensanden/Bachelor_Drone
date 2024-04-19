@@ -44,9 +44,14 @@ def run_server():
     server.set_fn_new_client(new_client)
     server.set_fn_message_received(message_received)
     server.run_forever()
-server_thread = threading.Thread(target = run_server)
-server_thread.daemon = True
-server_thread.start()
+    return server
+
+server = run_server()
+
+
+#server_thread = threading.Thread(target = run_server)
+#server_thread.daemon = True
+#server_thread.start()
 
 while True:
     
