@@ -82,7 +82,7 @@ function sendCommandPico(command) {
 
 //sender beskjed til raspberry
 function sendCommandRas(command) {
-  console.log("Sending messageras", command);
+  console.log("Sending messagerastest", command);
   console.log("BATTERY_STATS", command);
   
   webSocketRas.send(command);
