@@ -49,9 +49,9 @@ def run_server():
 server = run_server()
 
 
-#server_thread = threading.Thread(target = run_server)
-#server_thread.daemon = True
-#server_thread.start()
+server_thread = threading.Thread(target = run_server)
+server_thread.daemon = True
+server_thread.start()
 
 while True:
     
