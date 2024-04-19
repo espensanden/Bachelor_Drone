@@ -8,21 +8,6 @@ ADS = ADS1x15.ADS1115(1, 0x48)
 
 ADS.setGain(ADS.PGA_4_096V)
 ads_to_voltage = 0.000621
-
-def new_client(client, server):
-    server.send_message_to_all("Hey all, a new client has joined us")
-def message_received(client, server, message):
-    print("Received message from client {}: {}".format(client['id'], message))
-    # Gjør ønsket behandling av den mottatte meldingen her
-    if message == "CHARGING_PLATE_ON":
-        print ("plate is on")
-        
-    elif message == "CHARGING_PLATE_OFF":
-        server.send_message_to_all("ras_say_the_plate_is_off")
-        print ("plate is off")
-def send_message(server, message):
-    server.send_message_to_all(message)
-
 def adc_read_voltage():
     val_0 = ADS.readADC(0)
     val_1 = ADS.readADC(1)
@@ -36,6 +21,26 @@ def adc_read_voltage():
         "Analog3:": round(val_3*ads_to_voltage, 1)
     }
     return analog_voltage
+
+def new_client(client, server):
+    server.send_message_to_all("Hey all, a new client has joined us")
+
+def message_received(client, server, message):
+    print("Received message from client {}: {}".format(client['id'], message))
+    # Gjør ønsket behandling av den mottatte meldingen her
+    if message == "CHARGING_PLATE_ON":
+        
+        print ("plate is on")
+        
+    elif message == "CHARGING_PLATE_OFF":
+        server.send_message_to_all("ras_say_the_plate_is_off")
+        print ("plate is off")
+    elif message == 'BATTERY_STATS':
+        print(adc_read_voltage())
+def send_message(server, message):
+    server.send_message_to_all(message)
+
+
  
 
 

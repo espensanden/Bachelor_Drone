@@ -22,9 +22,7 @@ function messageWebSocketPico(ev) {
           break;
         case ev.data.startsWith("CHARGER_VOLTAGE:"):  
           break;
-        case 'hi':
-          console.log("hi from pi");
-          break;
+
         
           
         default:
@@ -85,6 +83,7 @@ function sendCommandPico(command) {
 //sender beskjed til raspberry
 function sendCommandRas(command) {
   console.log("Sending messageras", command);
+  console.log("BATTERY_STATS", command)
   
   webSocketRas.send(command);
 }
