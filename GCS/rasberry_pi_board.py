@@ -36,6 +36,7 @@ def message_received(client, server, message):
         server.send_message_to_all("ras_say_the_plate_is_off")
         print ("plate is off")
     elif message == 'BATTERY_STATS':
+        server.send_message_to_all("rasbat")
         print("rasbat")
 def send_message(server, message):
     server.send_message_to_all(message)
