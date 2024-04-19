@@ -26,7 +26,7 @@ def adc_read_voltage():
     val_2 = ADS.readADC(2)
     val_3 = ADS.readADC(3)
 
-    analog_values = {
+    analog_voltage = {
         "Analog0:": round(val_0*ads_to_voltage, 1),
         "Analog1:": round(val_1*ads_to_voltage, 1),
         "Analog2:": round(val_2*ads_to_voltage, 1),
