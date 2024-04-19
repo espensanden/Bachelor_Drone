@@ -10,7 +10,7 @@ ADS.setGain(ADS.PGA_4_096V)
 ads_to_voltage0 = 0.0006192
 ads_to_voltage1 = 0.000625
 ads_to_voltage2 = 0.000625
-ads_to_voltage3 = 0.000623
+ads_to_voltage3 = 0.0006225
 def adc_read_voltage():
     val_0 = ADS.readADC(0)
     val_1 = ADS.readADC(1)

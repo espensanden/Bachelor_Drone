@@ -46,8 +46,8 @@ function messageWebSocketRas(ev){
     default:
       console.log("");
     if (ev.data.startsWith("BATTERY_VOLTAGE_CELL0:")){
-      var BATTERY_VOLTAGE_CELL0 = ev.data.split(":")[1];
-      document.getElementById("battery-cell1").innerHTML = BATTERY_VOLTAGE_CELL0 + "V";
+      var BATTERY_VOLTAGE_CELL1 = ev.data.split(":")[1];
+      document.getElementById("battery-cell1").innerHTML = BATTERY_VOLTAGE_CELL1 + "V";
       }
     else if (ev.data.startsWith("BATTERY_VOLTAGE_CELL1:")){
       var BATTERY_VOLTAGE_CELL2 = ev.data.split(":")[1];
@@ -107,30 +107,6 @@ function sendCommandRas(command) {
   webSocketRas.send(command);
 }
 
-
-
-/*
-//sender beskjed til raspberry
-function sendCommandRas(command) {
-  console.log("Sending messageras", command);
-
-  switch(true){
-    case command.startsWith("BATTERY_VOLTAGE_CELL0:"):
-        var BATTERY_VOLTAGE_CELL1 = ev.data.split(":")[1];
-        document.getElementById("battery-cell1").innerHTML = BATTERY_VOLTAGE_CELL1 + "V";
-    
-
-  }
-  if (command.startsWith("BATTERY_VOLTAGE_CELL0:")){
-    var BATTERY_VOLTAGE_CELL1 = command.split(":")[1];
-    document.getElementById("battery-cell1").innerHTML = BATTERY_VOLTAGE_CELL1 + "V";
-    console.log("dette funker")
-    }
-  webSocketRas.send(command);
-}
-*/
-
-
 function callBack(){
   document.getElementById("light-indicator1").style.backgroundColor = setButtonRandomColor();
   sendCommandPico(''); 
@@ -139,6 +115,18 @@ function callBack(){
 }
 setInterval(callBack, 1000)
 
+//voltage to %
+battery_voltage_to_percent = 40
+
+Battery_percent1 = BATTERY_VOLTAGE_CELL1 * battery_voltage_to_percent
+Battery_percent2 = BATTERY_VOLTAGE_CELL2 * battery_voltage_to_percent
+Battery_percent3 = BATTERY_VOLTAGE_CELL3 * battery_voltage_to_percent
+Battery_percent4 = BATTERY_VOLTAGE_CELL4 * battery_voltage_to_percent
+
+
+BATTERY_VOLTAGE_CELL2
+BATTERY_VOLTAGE_CELL3
+BATTERY_VOLTAGE_CELL4
 
 //Battery system
 let battery_state1 = 20;

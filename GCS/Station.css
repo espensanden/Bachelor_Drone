@@ -208,13 +208,13 @@ background-color: #4f21f3;
   left: 100px;
 
 	height: 100px;
-  left: 50px;
+  left: 54px;
 	margin: 0;
 }
 .battery_voltage {
   position: relative;
   top: 80px;
-  left: 86px;
+  left: 82px;
 }
 .progress {
 	background-color: #8ebec7;
