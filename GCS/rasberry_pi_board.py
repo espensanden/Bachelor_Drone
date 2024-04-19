@@ -58,6 +58,6 @@ while True:
     #time.sleep(1)
     #analog_voltage = adc_read_voltage()
     #print(analog_voltage)
-    if time.time() % 10 == 0:
-        send_message(server, "hi")
-        print("hi")
+    #if time.time() % 10 == 0:
+    send_message(server, "hi")
+    print("hi")
