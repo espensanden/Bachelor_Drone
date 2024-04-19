@@ -35,7 +35,15 @@ while True:
         server.set_fn_new_client(new_client)
         server.set_fn_message_received(message_received)
         server.run_forever()
+        val_0 = ADS.readADC(0)
+        val_1 = ADS.readADC(1)
+        val_2 = ADS.readADC(2)
+        val_3 = ADS.readADC(3)
+
+        print("Analog0:", round(val_0*ads_to_voltage, 1),"V")
+        print("Analog1:", round(val_1*ads_to_voltage, 1),"V")
+        print("Analog2:", round(val_2*ads_to_voltage, 1),"V")
+        print("Analog3:", round(val_3*ads_to_voltage, 1),"V")
     except KeyboardInterrupt:
-        server.server_close()
         server.server_close()
         break
