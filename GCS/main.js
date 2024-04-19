@@ -16,15 +16,17 @@ function messageWebSocketPico(ev) {
           break;
         case 'CHARGING_ON':
           document.getElementById("light-indicator2").style.backgroundColor = "yellow"; 
-          
           break;
         case 'CHARGING_OFF': 
           document.getElementById("light-indicator2").style.backgroundColor = "grey";
           break;
         case ev.data.startsWith("CHARGER_VOLTAGE:"):  
-
           break;
-
+        case 'hi':
+          console.log("hi from pi");
+          break;
+        
+          
         default:
           console.log("");
 

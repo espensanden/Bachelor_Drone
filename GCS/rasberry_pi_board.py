@@ -60,3 +60,4 @@ while True:
     #print(analog_voltage)
     if time.time() % 10 == 0:
         send_message(server, "hi")
+        print("hi")
