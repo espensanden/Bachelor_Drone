@@ -84,11 +84,11 @@ function sendCommandPico(command) {
 //sender beskjed til raspberry
 function sendCommandRas(command) {
   console.log("Sending messageras", command);
-  switch(ev.data){
-  case startsWith("BATTERY_VOLTAGE_CELL0:"):
-      var BATTERY_VOLTAGE_CELL0 = ev.data.split(":")[1];
-      document.getElementById("battery-cell1").innerHTML = BATTERY_VOLTAGE_CELL0 + "V";
-  }
+  switch(true){
+    case command.startsWith("BATTERY_VOLTAGE_CELL0:"):
+        var BATTERY_VOLTAGE_CELL0 = ev.data.split(":")[1];
+        document.getElementById("battery-cell1").innerHTML = BATTERY_VOLTAGE_CELL0 + "V";
+    }
   
   webSocketRas.send(command);
 }
@@ -98,8 +98,8 @@ function sendCommandRas(command) {
 function callBack(){
   document.getElementById("light-indicator1").style.backgroundColor = setButtonRandomColor();
   sendCommandPico(''); 
-  sendCommandRas('');
-  sendCommandRas('BATTERY_STATS')
+  sendCommandRas('','');
+  sendCommandRas('BATTERY_STATS','')
 }
 setInterval(callBack, 1000)
 
