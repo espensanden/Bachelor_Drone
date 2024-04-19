@@ -38,7 +38,7 @@ distCoeffs = np.array([-0.3653858593342419, 0.1632243853386151, -0.0026716333098
 aruco_dict = cv2.aruco.Dictionary_get(cv2.aruco.DICT_4X4_50)
 parameters = cv2.aruco.DetectorParameters_create()
 
-#Camera
+#Camera configuration
 horizontal_res = 640
 vertical_res = 480
 picam2 = Picamera2()
@@ -48,7 +48,7 @@ picam2.preview_configuration.align()
 picam2.configure("preview")
 picam2.start()
 
-#Camera FOV
+#Camera FOV for Pi cam v2
 horizontal_fov = 62.2 * (math.pi / 180 )
 vertical_fov = 48.8 * (math.pi / 180)
 
@@ -56,8 +56,7 @@ vertical_fov = 48.8 * (math.pi / 180)
 manualArm = False
 
 
-#Vehicle connect
-vehicle = connect('/dev/ttyAMA0',baud=57600,wait_ready=True)
+
 
 
 
@@ -192,8 +191,11 @@ def landing_drone():
 
     cv2.imshow('Frame', im)  # Display the frame
 
+
+#Vehicle connect
+vehicle = connect('/dev/ttyAMA0',baud=57600,wait_ready=True)
+
 ##SETUP PARAMETERS TO ENABLE PRECISION LANDING
-##
 vehicle.parameters['PLND_ENABLED'] = 1
 vehicle.parameters['PLND_TYPE'] = 1 ##1 for companion computer
 vehicle.parameters['PLND_EST_TYPE'] = 0 ##0 for raw sensor, 1 for kalman filter pos estimation
