@@ -35,7 +35,7 @@ def message_received(client, server, message):
         server.send_message_to_all("rasbat")
         analog_voltage = adc_read_voltage()
         for key, i in analog_voltage.items():
-            server.send_message_to.all(key + str(i)) 
+            server.send_message_to_all(key + str(i)) 
         
 
 
