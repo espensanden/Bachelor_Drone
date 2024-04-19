@@ -95,7 +95,7 @@ function callBack(){
   sendCommandRas('');
  
 }
-setInterval(callBack, 5000)
+setInterval(callBack, 1000)
 
 
 //Battery system
