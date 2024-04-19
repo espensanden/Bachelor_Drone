@@ -83,7 +83,7 @@ function sendCommandPico(command) {
 //sender beskjed til raspberry
 function sendCommandRas(command) {
   console.log("Sending messageras", command);
-  sendCommandRas('BATTERY_STATS')
+  
   
   webSocketRas.send(command);
 }
@@ -94,7 +94,7 @@ function callBack(){
   document.getElementById("light-indicator1").style.backgroundColor = setButtonRandomColor();
   sendCommandPico(''); 
   sendCommandRas('');
- 
+  sendCommandRas('BATTERY_STATS')
 }
 setInterval(callBack, 1000)
 
