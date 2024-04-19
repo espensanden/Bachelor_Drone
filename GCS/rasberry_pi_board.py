@@ -35,9 +35,7 @@ def adc_read_voltage():
     }
     return analog_voltage
  
-server = WebsocketServer(host='192.168.1.169', port=8765, loglevel=logging.INFO)
-server.set_fn_new_client(new_client)
-server.set_fn_message_received(message_received)
+
 
 def run_server():
     server = WebsocketServer(host='192.168.1.169', port=8765, loglevel=logging.INFO)
