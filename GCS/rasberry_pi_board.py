@@ -15,10 +15,10 @@ def adc_read_voltage():
     val_3 = ADS.readADC(3)
 
     analog_voltage = {
-        "Analog0:": round(val_0*ads_to_voltage, 1),
-        "Analog1:": round(val_1*ads_to_voltage, 1),
-        "Analog2:": round(val_2*ads_to_voltage, 1),
-        "Analog3:": round(val_3*ads_to_voltage, 1)
+        "BATTERY_VOLTAGE_CELL0": round(val_0*ads_to_voltage, 1),
+        "BATTERY_VOLTAGE_CELL1:": round(val_1*ads_to_voltage, 1),
+        "BATTERY_VOLTAGE_CELL2:": round(val_2*ads_to_voltage, 1),
+        "BATTERY_VOLTAGE_CELL3:": round(val_3*ads_to_voltage, 1)
     }
     return analog_voltage
 
@@ -29,7 +29,6 @@ def message_received(client, server, message):
     print("Received message from client {}: {}".format(client['id'], message))
     # Gjør ønsket behandling av den mottatte meldingen her
     if message == "CHARGING_PLATE_ON":
-        
         print ("plate is on")
     elif message == 'BATTERY_STATS':
         server.send_message_to_all("rasbat")

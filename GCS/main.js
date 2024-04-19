@@ -43,6 +43,7 @@ function messageWebSocketRas(ev){
     case 'ras_say_the_plate_is_off':
       document.getElementById("light-indicator3").style.backgroundColor = "grey"; 
 
+
   }
 }
 
@@ -83,7 +84,11 @@ function sendCommandPico(command) {
 //sender beskjed til raspberry
 function sendCommandRas(command) {
   console.log("Sending messageras", command);
-  
+  switch(ev.data){
+  case startsWith("BATTERY_VOLTAGE_CELL0:"):
+      var BATTERY_VOLTAGE_CELL0 = ev.data.split(":")[1];
+      document.getElementById("battery-cell1").innerHTML = BATTERY_VOLTAGE_CELL0 + "V";
+  }
   
   webSocketRas.send(command);
 }
