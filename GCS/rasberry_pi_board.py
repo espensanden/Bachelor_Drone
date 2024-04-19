@@ -20,6 +20,8 @@ def message_received(client, server, message):
     elif message == "CHARGING_PLATE_OFF":
         server.send_message_to_all("ras_say_the_plate_is_off")
         print ("plate is off")
+def send_message(server, message):
+    server.send_message_to_all(message)
 
 def adc_read_voltage():
     val_0 = ADS.readADC(0)
@@ -47,6 +49,9 @@ server_thread.daemon = True
 server_thread.start()
 
 while True:
-    analog_voltage = adc_read_voltage()
-    print(analog_voltage)
-    time.sleep(1)
+    
+    #time.sleep(1)
+    #analog_voltage = adc_read_voltage()
+    #print(analog_voltage)
+    if time.time() % 10 == 0:
+        send_message(server, "hi")
