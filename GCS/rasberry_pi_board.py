@@ -2,7 +2,7 @@ import logging
 from websocket_server import WebsocketServer
 import time
 import ADS1x15 #https://github.com/chandrawi/ADS1x15-ADC/blob/main/examples/ADS_read.py
-import threading 
+
 
 ADS = ADS1x15.ADS1115(1, 0x48)
 
@@ -50,20 +50,5 @@ def run_server():
     server.set_fn_new_client(new_client)
     server.set_fn_message_received(message_received)
     server.run_forever()
-    return server
 
 server = run_server()
-
-
-server_thread = threading.Thread(target = run_server)
-server_thread.daemon = True
-server_thread.start()
-
-while True:
-    
-    #time.sleep(1)
-    #analog_voltage = adc_read_voltage()
-    #print(analog_voltage)
-    #if time.time() % 10 == 0:
-    send_message(server, "hi")
-    print("hi")
