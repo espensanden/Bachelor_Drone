@@ -10,12 +10,10 @@
 
 </head>
 <body>
-    <h1>blue</h1>
-    <h1>Control LED  via pc</h1>
-    <button onclick="sendCommand('CHARGING_PLATE_ON')">Turn On</button>
-    <button onclick="sendCommand('CHARGING_PLATE_OFF')">Turn Off</button>
-    <button onclick ="testComand()">test button</button>
-        
+    <div class = "cmaera-stream">
+        <img id="videoFrame" src="" alt="Video Stream">
+        <div id="objectDetails"></div>
+    </div>
             <div id="ToggleSwitch1">
             <label class="switch" >
             <input type="checkbox">
@@ -82,17 +80,15 @@
                     </div>
                     <div class = "battery_voltage" id="battery-cell4">--</div>
                 </div>
-                <div class = "battery_cell_side">
-                    <div class="progress_side">
-                        <div class="progress_done_side" data-done="50" id="battery_state_bar_side">Error battery value</div>
+                <div class = "battery_side_total">
+                    <div class="progress_side_total">
+                        <div class="progress_done_side_total" data-done="50" id="battery_state_bar_side_total">Error battery value</div>
                     </div>
+                    <div class = "battery_voltag_total" id="battery-cell_total">--</div>
                 </div>
             </div>
 
-
-
-
-    <p class ="bottom" >made by group 12</p>
+    <div class = "group-12"><p class ="bottom" >made by group 12</p></div>
     <script src = "main.js"> </script>
 </body>
 </html>

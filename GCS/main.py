@@ -28,8 +28,8 @@ def lcd_connecting():
     lcd.putstr(ssid)
 
 
-ssid = 'ASUS'
-password = '4711942247'
+ssid = 'ASUS' # house ssid = 'ASUS'
+password = '4711942247' # password = '' 
 
 
 

@@ -22,6 +22,12 @@ body {
   
 }
 
+.group-12{
+  position: absolute;
+  top: 170px;
+  left: 10px;
+}
+
 
 
 /*Slider   https://www.w3schools.com/howto/howto_css_switch.asp
@@ -216,6 +222,11 @@ background-color: #4f21f3;
   top: 80px;
   left: 82px;
 }
+.battery_voltag_total{
+  position: relative;
+  top: 0;
+  left: 30;
+}
 .progress {
 	background-color: #8ebec7;
 	border-radius: 20px;
@@ -225,7 +236,7 @@ background-color: #4f21f3;
 	width: 200px;  
   transform: rotate(270deg);
 }
-.progress_side {
+.progress_side_total {
 	background-color: #8ebec7;
 	border-radius: 20px;
 	position: relative;
@@ -261,7 +272,7 @@ background-color: #4f21f3;
   left: 300px;
   top: 0px;
 }
-.battery_cell_side{
+.battery_side_total{
   
   position: absolute;
   left: 80px;
@@ -323,7 +334,7 @@ background-color: #4f21f3;
 	transition: 1s ease 0.3s;
 }
 
-.progress_done_side {
+.progress_done_side_total {
 	background: linear-gradient(to left, #09ff09, #5edb15);
 	box-shadow: 0 3px 3px -5px #09ff09, 0 2px 5px #09ff09;
 	border-radius: 20px;
@@ -335,4 +346,13 @@ background-color: #4f21f3;
 	width: 0;
 
 	transition: 1s ease 0.3s;
+}
+
+/*camerastream 
+##############################################################################################################################################################################################################################*/
+
+.cmaera-stream{
+  position: absolute;
+  top: 10px;
+  left: 10px;
 }

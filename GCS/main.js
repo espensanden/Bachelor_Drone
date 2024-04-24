@@ -2,9 +2,9 @@
 const webSocketPico = new WebSocket("ws://192.168.1.140/ws")
 const webSocketRas = new WebSocket("ws://192.168.1.169:8765");
 
-
-webSocketPico.addEventListener('message', messageWebSocketPico)
 webSocketRas.addEventListener('message', messageWebSocketRas)
+webSocketPico.addEventListener('message', messageWebSocketPico)
+
 
 
 
@@ -23,8 +23,6 @@ function messageWebSocketPico(ev) {
         case ev.data.startsWith("CHARGER_VOLTAGE:"):  
           break;
 
-        
-          
         default:
           console.log("");
 
@@ -34,6 +32,11 @@ function messageWebSocketPico(ev) {
       }
   } };
 
+
+let BATTERY_VOLTAGE_CELL1;
+let BATTERY_VOLTAGE_CELL2;
+let BATTERY_VOLTAGE_CELL3;
+let BATTERY_VOLTAGE_CELL4;
 
   
 //tar i mot beskjed fra raspberry
@@ -46,24 +49,89 @@ function messageWebSocketRas(ev){
     default:
       console.log("");
     if (ev.data.startsWith("BATTERY_VOLTAGE_CELL0:")){
-      var BATTERY_VOLTAGE_CELL1 = ev.data.split(":")[1];
+      BATTERY_VOLTAGE_CELL1 = ev.data.split(":")[1];
       document.getElementById("battery-cell1").innerHTML = BATTERY_VOLTAGE_CELL1 + "V";
-      }
+      
+    }
     else if (ev.data.startsWith("BATTERY_VOLTAGE_CELL1:")){
-      var BATTERY_VOLTAGE_CELL2 = ev.data.split(":")[1];
+      BATTERY_VOLTAGE_CELL2 = ev.data.split(":")[1];
       document.getElementById("battery-cell2").innerHTML = BATTERY_VOLTAGE_CELL2 + "V";
       } 
     else if (ev.data.startsWith("BATTERY_VOLTAGE_CELL2:")){
-      var BATTERY_VOLTAGE_CELL3 = ev.data.split(":")[1];
+      BATTERY_VOLTAGE_CELL3 = ev.data.split(":")[1];
       document.getElementById("battery-cell3").innerHTML = BATTERY_VOLTAGE_CELL3 + "V";
       } 
     else if (ev.data.startsWith("BATTERY_VOLTAGE_CELL3:")){
-      var BATTERY_VOLTAGE_CELL4 = ev.data.split(":")[1];
+      BATTERY_VOLTAGE_CELL4 = ev.data.split(":")[1];
       document.getElementById("battery-cell4").innerHTML = BATTERY_VOLTAGE_CELL4 + "V";
+      }
+
       } 
 
   }
-}
+  console.log(BATTERY_VOLTAGE_CELL1)
+  battery_voltage_to_percent = 0.004;
+  Battery_percents1 = (( BATTERY_VOLTAGE_CELL1-3.8) / battery_voltage_to_percent);
+  let battery_state1 = (Battery_percents1.toFixed(0));
+  const progress1 = document.querySelector('.progress_done1');
+
+  progress1.style.width = battery_state1 + "%";
+  
+  document.getElementById('battery_state_bar1').innerHTML = battery_state1 + "%";
+
+
+
+
+  console.log(BATTERY_VOLTAGE_CELL2)
+  battery_voltage_to_percent = 0.004;
+  Battery_percents2 = (( BATTERY_VOLTAGE_CELL2-3.8) / battery_voltage_to_percent);
+  let battery_state2 = (Battery_percents2.toFixed(0));
+  const progress2 = document.querySelector('.progress_done2');
+
+  progress2.style.width = battery_state2 + "%";
+  
+  document.getElementById('battery_state_bar2').innerHTML = battery_state2 + "%";
+
+
+
+
+  console.log(BATTERY_VOLTAGE_CELL3)
+  battery_voltage_to_percent = 0.004;
+  Battery_percents3 = (( BATTERY_VOLTAGE_CELL3-3.8) / battery_voltage_to_percent);
+  let battery_state3 = (Battery_percents3.toFixed(0));
+  const progress3 = document.querySelector('.progress_done3');
+
+  progress3.style.width = battery_state3 + "%";
+  
+  document.getElementById('battery_state_bar3').innerHTML = battery_state3 + "%";
+
+
+  console.log(BATTERY_VOLTAGE_CELL4)
+  battery_voltage_to_percent = 0.004;
+  Battery_percents4 = (( BATTERY_VOLTAGE_CELL4-3.8) / battery_voltage_to_percent);
+  let battery_state4 = (Battery_percents4.toFixed(0));
+  const progress4 = document.querySelector('.progress_done4');
+
+  progress4.style.width = battery_state4 + "%";
+  
+  document.getElementById('battery_state_bar4').innerHTML = battery_state4 + "%";
+
+  //Total battery
+  battery_total_voltage_to_percent = 0.02;
+  Battery_total_voltage = parseFloat(BATTERY_VOLTAGE_CELL1) + parseFloat(BATTERY_VOLTAGE_CELL2) + parseFloat(BATTERY_VOLTAGE_CELL3) + parseFloat(BATTERY_VOLTAGE_CELL4) 
+  console.log(Battery_total_voltage)
+  Battery_percents_total = (( Battery_total_voltage-15.2) / battery_total_voltage_to_percent);
+  console.log(Battery_percents_total)
+
+  let battery_state_total = Battery_percents_total.toFixed(0);
+  const progress_total = document.querySelector('.progress_done_side_total');
+  
+  progress_total.style.width = battery_state_total + "%";
+  
+  document.getElementById('battery_state_bar_side_total').innerHTML = battery_state_total + "%";
+
+  document.getElementById("battery-cell_total").innerHTML = Battery_total_voltage.toFixed(2) + "V"
+
 
 document.addEventListener('DOMContentLoaded', function() {
     var checkbox = document.querySelector('input[name="checkboxPlate"]');
@@ -111,48 +179,22 @@ function callBack(){
   document.getElementById("light-indicator1").style.backgroundColor = setButtonRandomColor();
   sendCommandPico(''); 
   //sendCommandRas('');
-  sendCommandRas('BATTERY_STATS')
+  sendCommandRas('BATTERY_STATS');
 }
-setInterval(callBack, 1000)
-
-//voltage to %
-battery_voltage_to_percent = 40
-
-Battery_percent1 = BATTERY_VOLTAGE_CELL1 * battery_voltage_to_percent
-Battery_percent2 = BATTERY_VOLTAGE_CELL2 * battery_voltage_to_percent
-Battery_percent3 = BATTERY_VOLTAGE_CELL3 * battery_voltage_to_percent
-Battery_percent4 = BATTERY_VOLTAGE_CELL4 * battery_voltage_to_percent
+setInterval(callBack, 1000);
 
 
-BATTERY_VOLTAGE_CELL2
-BATTERY_VOLTAGE_CELL3
-BATTERY_VOLTAGE_CELL4
 
-//Battery system
-let battery_state1 = 20;
-const progress1 = document.querySelector('.progress_done1');
+const socket = new WebSocket('ws://localhost:8765/'); //ip to raspberry pi
+  socket.onmessage = function (event) {
+      let parts = event.data.split(';');
+      const imageElement = document.getElementById('videoFrame');
+      const detailsElement = document.getElementById('objectDetails');
+      
+      imageElement.src = 'data:image/jpeg;base64,' + parts[0];
+      detailsElement.textContent = parts[1];  // Display object details
+  };
 
-progress1.style.width = battery_state1 + "%";
-
-document.getElementById('battery_state_bar1').innerHTML = battery_state1 + "%";
-
-let battery_state2 = 40;
-const progress2 = document.querySelector('.progress_done2');
-
-progress2.style.width = battery_state2 + "%";
-
-document.getElementById('battery_state_bar2').innerHTML = battery_state2 + "%";
-
-let battery_state3 = 60;
-const progress3 = document.querySelector('.progress_done3');
-
-progress3.style.width = battery_state3 + "%";
-
-document.getElementById('battery_state_bar3').innerHTML = battery_state3 + "%";
-
-let battery_state4 = 80;
-const progress4 = document.querySelector('.progress_done4');
-
-progress4.style.width = battery_state4 + "%";
-
-document.getElementById('battery_state_bar4').innerHTML = battery_state4 + "%";
+  socket.onerror = function (error) {
+      console.error('WebSocket error:', error);
+  };
