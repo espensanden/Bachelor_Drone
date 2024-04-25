@@ -3,7 +3,7 @@ import websockets
 import cv2
 import base64
 import numpy as np
-import pyrealsense2 as rs
+import pyrealsense2.pyrealsense2 as rs
 
 async def video_stream(websocket, path):
     pipeline = rs.pipeline()
