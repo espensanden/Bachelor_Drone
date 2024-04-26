@@ -1,6 +1,6 @@
 
 const webSocketPico = new WebSocket("ws://192.168.1.140/ws")
-const webSocketRas = new WebSocket("ws://192.168.0.165:8765"); //"ws://192.168.1.169:8765"
+const webSocketRas = new WebSocket("ws://192.168.0.166:8765"); //"ws://192.168.1.169:8765"
 
 webSocketRas.addEventListener('message', messageWebSocketRas)
 webSocketPico.addEventListener('message', messageWebSocketPico)
@@ -105,7 +105,6 @@ function messageWebSocketRas(ev){
   
   document.getElementById('battery_state_bar3').innerHTML = battery_state3 + "%";
 
-
   console.log(BATTERY_VOLTAGE_CELL4)
   battery_voltage_to_percent = 0.004;
   Battery_percents4 = (( BATTERY_VOLTAGE_CELL4-3.8) / battery_voltage_to_percent);
@@ -120,7 +119,7 @@ function messageWebSocketRas(ev){
   battery_total_voltage_to_percent = 0.02;
   Battery_total_voltage = parseFloat(BATTERY_VOLTAGE_CELL1) + parseFloat(BATTERY_VOLTAGE_CELL2) + parseFloat(BATTERY_VOLTAGE_CELL3) + parseFloat(BATTERY_VOLTAGE_CELL4) 
   console.log(Battery_total_voltage)
-  Battery_percents_total = (( Battery_total_voltage-15.2) / battery_total_voltage_to_percent);
+  Battery_percents_total = ((Battery_total_voltage-15.2) / battery_total_voltage_to_percent);
   console.log(Battery_percents_total)
 
   let battery_state_total = Battery_percents_total.toFixed(0);
@@ -185,7 +184,7 @@ setInterval(callBack, 1000);
 
 
 
-const socket = new WebSocket('ws://localhost:8765/'); //ip to raspberry pi
+const socket = new WebSocket('ws://192.168.0.165:8765'); //ip to raspberry pi 192.168.0.165 localhost
   socket.onmessage = function (event) {
       let parts = event.data.split(';');
       const imageElement = document.getElementById('videoFrame');

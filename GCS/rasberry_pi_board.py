@@ -50,7 +50,7 @@ def send_message(server, message):
 
 
 def run_server():
-    server = WebsocketServer(host='192.168.1.169', port=8765, loglevel=logging.INFO) #raspberry pi 3 = 192.168.1.169
+    server = WebsocketServer(host='192.168.0.166', port=8765, loglevel=logging.INFO) #raspberry pi 3 = 192.168.1.169
     server.set_fn_new_client(new_client)
     server.set_fn_message_received(message_received)
     server.run_forever()

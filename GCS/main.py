@@ -117,7 +117,7 @@ async def read_sensor(request, ws):
 
         
         
-        charger_curent_value= round(((charger_voltage.read_u16() * conversion_factor)/ Shunt_resistor) * (INA_GAIN * 0.1)-0.006, 3)
+        charger_curent_value= round(((charger_voltage.read_u16() * conversion_factor)/ Shunt_resistor) * (INA_GAIN * 0.1)-0.006, 2)
         if charger_curent_value < 0.015:
             charger_curent_value = 0 
         print(charger_curent_value)
