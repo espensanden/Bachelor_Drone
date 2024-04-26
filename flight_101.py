@@ -203,10 +203,10 @@ def landing_drone():
                 print("Vehicle now in LAND mode")
                 print("------------------------")
                 send_land_message(x_ang,y_ang)
-                print("X ang: ", x_ang, "y ang: ", y_ang)
+                print("X ang: ", x_ang, " y ang: ", y_ang)
             else:
                 send_land_message(x_ang,y_ang)
-                print("X ang: ", x_ang, "y ang: ", y_ang)
+                print("X ang: ", x_ang, " y ang: ", y_ang)
                 pass
 
             print("x centre pixel: "+str(x_avg)+" y centre pixel: "+str(y_avg))
