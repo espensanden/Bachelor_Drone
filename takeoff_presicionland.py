@@ -201,8 +201,8 @@ vehicle.parameters['PLND_TYPE'] = 1 ##1 for companion computer
 vehicle.parameters['PLND_EST_TYPE'] = 0 ##0 for raw sensor, 1 for kalman filter pos estimation
 vehicle.parameters['LAND_SPEED'] = 20 ##Descent speed of 30cm/s
 
-print('PLND_ENABLED')
-print('PLND_TYPE')
+print(vehicle.parameters['PLND_ENABLED'])
+print(vehicle.parameters['PLND_TYPE'])
 
 if script_mode == 1:
     arm_and_takeoff(takeoff_height)
