@@ -241,8 +241,8 @@ wp_target=LocationGlobalRelative(lat_target,lon_target,takeoff_height)
 distanceBetweenLaunchAndTarget=get_distance_meters(wp_target,wp_home)
 print("Target location is "+str(distanceBetweenLaunchAndTarget)+" meters from charging station.")
 
-print('PLND_ENABLED')
-print('PLND_TYPE')
+print(vehicle.parameters['PLND_ENABLED'])
+print(vehicle.parameters['PLND_TYPE'])
 
 arm_and_takeoff(takeoff_height)
 goto(wp_target)
@@ -253,9 +253,8 @@ while vehicle.armed==True:
 
 print("")
 print("----------------------------------")
-print("Arrived at the taco destination!")
-print("Dropping tacos and heading home.")
-print("----------ENJOY!----------------")
+print("Arrived at the waypoint destination!")
+print("Gathering info and heading home.")
 
 
 
