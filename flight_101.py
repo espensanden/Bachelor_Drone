@@ -253,9 +253,8 @@ while vehicle.armed==True:
 
 print("")
 print("----------------------------------")
-print("Arrived at the taco destination!")
-print("Dropping tacos and heading home.")
-print("----------ENJOY!----------------")
+print("Arrived at the waypoint destination!")
+print("Gathering info and heading home.")
 
 
 
