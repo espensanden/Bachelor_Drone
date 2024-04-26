@@ -15,7 +15,7 @@ lon_target = 10.8695092
 
 #Variables
 takeoff_height = 3
-velocity = 1
+velocity = 0.5
 
 
 first_run = 0
@@ -134,7 +134,7 @@ def send_land_message(x,y):
 def goto(targetLocation):
     distanceToTargetLocation = get_distance_meters(targetLocation,vehicle.location.global_relative_frame)
 
-    vehicle.simple_goto(targetLocation)
+    vehicle.simple_goto(targetLocation, airspeed =None, groundspeed=0.5)
 
     while vehicle.mode.name=="GUIDED":
         currentDistance = get_distance_meters(targetLocation,vehicle.location.global_relative_frame)
@@ -203,8 +203,10 @@ def landing_drone():
                 print("Vehicle now in LAND mode")
                 print("------------------------")
                 send_land_message(x_ang,y_ang)
+                print("X ang: ", x_ang, "y ang: ", y_ang)
             else:
                 send_land_message(x_ang,y_ang)
+                print("X ang: ", x_ang, "y ang: ", y_ang)
                 pass
 
             print("x centre pixel: "+str(x_avg)+" y centre pixel: "+str(y_avg))
@@ -219,7 +221,7 @@ def landing_drone():
         print('Target likely not found. Error: '+str(e))
         notfound_count=notfound_count+1
 
-    cv2.imshow('Frame', im)  # Display the frame
+    #cv2.imshow('Frame', im)  # Display the frame
 
 
 #Vehicle connect
@@ -245,7 +247,7 @@ print("Target location is "+str(distanceBetweenLaunchAndTarget)+" meters from ch
 print(vehicle.parameters['PLND_ENABLED'])
 print(vehicle.parameters['PLND_TYPE'])
 
-vehicle.groundspeed = 1
+#vehicle.groundspeed = 1
 
 arm_and_takeoff(takeoff_height)
 goto(wp_target)
