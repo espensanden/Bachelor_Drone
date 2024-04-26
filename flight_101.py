@@ -17,6 +17,7 @@ lon_target = 10.8688219
 takeoff_height = 3
 velocity = 0.5
 
+
 first_run = 0
 start_time = 0
 start_time=0
@@ -243,6 +244,8 @@ print("Target location is "+str(distanceBetweenLaunchAndTarget)+" meters from ch
 
 print(vehicle.parameters['PLND_ENABLED'])
 print(vehicle.parameters['PLND_TYPE'])
+
+vehicle.groundspeed = 0.5
 
 arm_and_takeoff(takeoff_height)
 goto(wp_target)
