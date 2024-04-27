@@ -8,7 +8,7 @@ from pymavlink import mavutil
 
 
 
-#GPS coordinates to target...
+#GPS coordinates to target
 lat_target = 59.8227631
 lon_target = 10.8692634
 
