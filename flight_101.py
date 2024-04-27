@@ -252,6 +252,7 @@ print(vehicle.parameters['PLND_TYPE'])
 
 arm_and_takeoff(takeoff_height)
 goto(wp_target)
+print("executed target")
 goto(wp_home)
 
 while vehicle.armed==True:
