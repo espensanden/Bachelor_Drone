@@ -15,7 +15,7 @@ lon_target = 10.8692634
 
 #Variables
 takeoff_height = 3
-velocity = 0.5
+velocity = 1
 
 
 first_run = 0
@@ -134,11 +134,11 @@ def send_land_message(x,y):
 def goto(targetLocation):
     distanceToTargetLocation = get_distance_meters(targetLocation,vehicle.location.global_relative_frame)
 
-    vehicle.simple_goto(targetLocation, airspeed =None, groundspeed=0.5)
+    vehicle.simple_goto(targetLocation, airspeed =None, groundspeed=1)
 
     while vehicle.mode.name=="GUIDED":
         currentDistance = get_distance_meters(targetLocation,vehicle.location.global_relative_frame)
-        if currentDistance<distanceToTargetLocation*.02:
+        if currentDistance<distanceToTargetLocation*.10:
             print("Reached target waypoint.")
             time.sleep(2)
             break
@@ -239,6 +239,7 @@ lat_home=vehicle.location.global_relative_frame.lat
 lon_home=vehicle.location.global_relative_frame.lon
 
 wp_home=LocationGlobalRelative(lat_home,lon_home,takeoff_height)
+print("Saved home location to: ", wp_home)
 wp_target=LocationGlobalRelative(lat_target,lon_target,takeoff_height)
 
 distanceBetweenLaunchAndTarget=get_distance_meters(wp_target,wp_home)
