@@ -52,11 +52,12 @@ def arm_and_takeoff(targetHeight):
 
 def monitor_battery():
     # Create a connection for receiving battery status
+    master = mavutil.mavlink_connection('/dev/ttyAMA0', baud=57600)
     last_time = time.time()
 
     while True:
         try:
-            battery_status = vehicle.recv_match(type='BATTERY_STATUS', blocking=True)
+            battery_status = master.recv_match(type='BATTERY_STATUS', blocking=True)
             if battery_status:
                 current_amps = battery_status.current_battery / 100.0  # Convert to amperes
                 ampere_hours_per_sec = current_amps / 3600  # Convert current to ampere-hours per second (Ah/s)
