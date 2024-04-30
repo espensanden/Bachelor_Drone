@@ -3,7 +3,6 @@ from websocket_server import WebsocketServer
 import time
 import ADS1x15 #https://github.com/chandrawi/ADS1x15-ADC/blob/main/examples/ADS_read.py
 
-
 ADS = ADS1x15.ADS1115(1, 0x48)
 
 ADS.setGain(ADS.PGA_4_096V)
