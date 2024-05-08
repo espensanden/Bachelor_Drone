@@ -60,6 +60,6 @@ async def video_stream(websocket, path):
         pipeline.stop()
 
 #ip to raspberry pi
-start_server = websockets.serve(video_stream, 'localhost', 8765)
+start_server = websockets.serve(video_stream, '192.168.0.102', 8765) # raspberry pi 4 = 192.168.0.165 "localhost"
 asyncio.get_event_loop().run_until_complete(start_server)
 asyncio.get_event_loop().run_forever()

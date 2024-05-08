@@ -8,7 +8,7 @@
     <img id="videoFrame" src="" alt="Video Stream">
     <div id="objectDetails"></div>
     <script>
-        const socket = new WebSocket('ws://localhost:8765/'); //ip to raspberry pi
+        const socket = new WebSocket('ws://192.168.0.165:8765/'); //ip to raspberry pi  local= 'ws://localhost:8765/' 192.168.0.165
 
         socket.onmessage = function (event) {
             let parts = event.data.split(';');

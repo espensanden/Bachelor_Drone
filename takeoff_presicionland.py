@@ -8,7 +8,7 @@ from pymavlink import mavutil
 
 
 #Variables
-takeoff_height = 3
+takeoff_height = 2
 velocity = 0.5
 
 first_run = 0
@@ -20,7 +20,7 @@ end_time=0
 found_count=0
 notfound_count=0
 
-targetAltitude=3
+targetAltitude=2
 
 id_to_find = 0
 aruco_marker_size = 10 #in cm
@@ -201,8 +201,8 @@ vehicle.parameters['PLND_TYPE'] = 1 ##1 for companion computer
 vehicle.parameters['PLND_EST_TYPE'] = 0 ##0 for raw sensor, 1 for kalman filter pos estimation
 vehicle.parameters['LAND_SPEED'] = 20 ##Descent speed of 30cm/s
 
-print('PLND_ENABLED')
-print('PLND_TYPE')
+print(vehicle.parameters['PLND_ENABLED'])
+print(vehicle.parameters['PLND_TYPE'])
 
 if script_mode == 1:
     arm_and_takeoff(takeoff_height)

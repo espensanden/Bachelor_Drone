@@ -3,7 +3,6 @@ from websocket_server import WebsocketServer
 import time
 import ADS1x15 #https://github.com/chandrawi/ADS1x15-ADC/blob/main/examples/ADS_read.py
 
-
 ADS = ADS1x15.ADS1115(1, 0x48)
 
 ADS.setGain(ADS.PGA_4_096V)
@@ -38,8 +37,7 @@ def message_received(client, server, message):
         analog_voltage = adc_read_voltage()
         for key, i in analog_voltage.items():
             server.send_message_to_all(key + str(i)) 
-        
-
+ 
 
     elif message == "CHARGING_PLATE_OFF":
         server.send_message_to_all("ras_say_the_plate_is_off")
@@ -50,7 +48,7 @@ def send_message(server, message):
 
 
 def run_server():
-    server = WebsocketServer(host='192.168.1.169', port=8765, loglevel=logging.INFO)
+    server = WebsocketServer(host='192.168.0.166', port=8765, loglevel=logging.INFO) #raspberry pi 3 = 192.168.1.169
     server.set_fn_new_client(new_client)
     server.set_fn_message_received(message_received)
     server.run_forever()

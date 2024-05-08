@@ -9,13 +9,14 @@ from pymavlink import mavutil
 
 
 #GPS coordinates to target
-lat_target = 10
-lon_target = 10
+lat_target = 59.8227631
+lon_target = 10.8692634
 
 
 #Variables
 takeoff_height = 3
-velocity = 0.5
+velocity = 1
+
 
 first_run = 0
 start_time = 0
@@ -132,11 +133,11 @@ def send_land_message(x,y):
 def goto(targetLocation):
     distanceToTargetLocation = get_distance_meters(targetLocation,vehicle.location.global_relative_frame)
 
-    vehicle.simple_goto(targetLocation)
+    vehicle.simple_goto(targetLocation, airspeed =None, groundspeed=1)
 
     while vehicle.mode.name=="GUIDED":
         currentDistance = get_distance_meters(targetLocation,vehicle.location.global_relative_frame)
-        if currentDistance<distanceToTargetLocation*.02:
+        if currentDistance<distanceToTargetLocation*.10:
             print("Reached target waypoint.")
             time.sleep(2)
             break
@@ -201,8 +202,10 @@ def landing_drone():
                 print("Vehicle now in LAND mode")
                 print("------------------------")
                 send_land_message(x_ang,y_ang)
+                print("X ang: ", x_ang, " y ang: ", y_ang)
             else:
                 send_land_message(x_ang,y_ang)
+                print("X ang: ", x_ang, " y ang: ", y_ang)
                 pass
 
             print("x centre pixel: "+str(x_avg)+" y centre pixel: "+str(y_avg))
@@ -217,7 +220,7 @@ def landing_drone():
         print('Target likely not found. Error: '+str(e))
         notfound_count=notfound_count+1
 
-    cv2.imshow('Frame', im)  # Display the frame
+    #cv2.imshow('Frame', im)  # Display the frame
 
 
 #Vehicle connect
@@ -235,16 +238,20 @@ lat_home=vehicle.location.global_relative_frame.lat
 lon_home=vehicle.location.global_relative_frame.lon
 
 wp_home=LocationGlobalRelative(lat_home,lon_home,takeoff_height)
+print("Saved home location to: ", wp_home)
 wp_target=LocationGlobalRelative(lat_target,lon_target,takeoff_height)
 
 distanceBetweenLaunchAndTarget=get_distance_meters(wp_target,wp_home)
 print("Target location is "+str(distanceBetweenLaunchAndTarget)+" meters from charging station.")
 
-print('PLND_ENABLED')
-print('PLND_TYPE')
+print(vehicle.parameters['PLND_ENABLED'])
+print(vehicle.parameters['PLND_TYPE'])
+
+#vehicle.groundspeed = 1
 
 arm_and_takeoff(takeoff_height)
 goto(wp_target)
+print("executed target")
 goto(wp_home)
 
 while vehicle.armed==True:
@@ -252,7 +259,9 @@ while vehicle.armed==True:
 
 print("")
 print("----------------------------------")
-print("Arrived at the destination!")
+print("Arrived at the taco destination!")
+print("Dropping tacos and heading home.")
+print("----------ENJOY!----------------")
 
 
 
