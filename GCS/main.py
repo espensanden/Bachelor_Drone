@@ -28,8 +28,8 @@ def lcd_connecting():
     lcd.putstr(ssid)
 
 
-ssid = 'ASUS' # house ssid = 'ASUS'
-password = '4711942247' # password = '' 
+ssid = 'TP-Link_97A6' # house ssid = 'ASUS'
+password = '61728500' # password = '' 
 
 
 
@@ -130,7 +130,5 @@ async def read_sensor(request, ws):
         lcd.move_to(5,1)
         lcd.putstr(str(charger_curent_value) + "A")
     
-
-
-
+    
 app.run(port=80)

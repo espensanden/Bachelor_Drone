@@ -1,5 +1,5 @@
 
-const webSocketPico = new WebSocket("ws://192.168.1.140/ws")
+const webSocketPico = new WebSocket("ws://192.168.0.140/ws"); //  ws://192.168.1.140/
 const webSocketRas = new WebSocket("ws://192.168.0.166:8765"); //"ws://192.168.1.169:8765"
 
 webSocketRas.addEventListener('message', messageWebSocketRas)

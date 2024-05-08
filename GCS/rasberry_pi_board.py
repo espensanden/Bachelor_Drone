@@ -32,6 +32,11 @@ def message_received(client, server, message):
     # Gjør ønsket behandling av den mottatte meldingen her
     if message == "CHARGING_PLATE_ON":
         print ("plate is on")
+    elif message == 'BATTERY_STATS':
+        server.send_message_to_all("rasbat")
+        analog_voltage = adc_read_voltage()
+        for key, i in analog_voltage.items():
+            server.send_message_to_all(key + str(i)) 
  
 
     elif message == "CHARGING_PLATE_OFF":
