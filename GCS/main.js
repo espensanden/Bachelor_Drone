@@ -51,7 +51,6 @@ function messageWebSocketRas(ev){
     if (ev.data.startsWith("BATTERY_VOLTAGE_CELL0:")){
       BATTERY_VOLTAGE_CELL1 = ev.data.split(":")[1];
       document.getElementById("battery-cell1").innerHTML = BATTERY_VOLTAGE_CELL1 + "V";
-      console.log(BATTERY_VOLTAGE_CELL1) = parseInt(BATTERY_VOLTAGE_CELL1, 10) +10;
       
     }
     else if (ev.data.startsWith("BATTERY_VOLTAGE_CELL1:")){
