@@ -66,8 +66,8 @@ function messageWebSocketRas(ev){
       document.getElementById("battery-cell4").innerHTML = BATTERY_VOLTAGE_CELL4 + "V";
       }
 
-       
-  }
+      } 
+  
   BATTERY_VOLTAGE_CELL1=parseFloat(BATTERY_VOLTAGE_CELL1)
   
   battery_voltage_to_percent = 0.004;
@@ -80,7 +80,7 @@ function messageWebSocketRas(ev){
   document.getElementById('battery_state_bar1').innerHTML = battery_state1 + "%";
   console.log(typeof battery_state1);
 
-}
+
 
   console.log(BATTERY_VOLTAGE_CELL2)
   battery_voltage_to_percent = 0.004;
@@ -131,7 +131,7 @@ function messageWebSocketRas(ev){
 
   document.getElementById("battery-cell_total").innerHTML = Battery_total_voltage.toFixed(2) + "V"
 
-
+    }
 document.addEventListener('DOMContentLoaded', function() {
     var checkbox = document.querySelector('input[name="checkboxPlate"]');
     checkbox.addEventListener('change', function() {
