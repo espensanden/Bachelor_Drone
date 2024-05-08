@@ -78,7 +78,7 @@ def arm_and_takeoff(targetHeight):
         while vehicle.mode!='GUIDED':
                 print("Waiting for drone to enter GUIDED flight mode")
                 time.sleep(1)
-        print("Vehicle now in GUIDED MODE. Have fun!!")
+        print("Vehicle now in GUIDED MODE.")
 
         if manualArm==False:
             vehicle.armed = True
@@ -87,10 +87,9 @@ def arm_and_takeoff(targetHeight):
                 time.sleep(1)
         else:
             if vehicle.armed == False:
-                print("Exiting script. manualArm set to True but vehicle not armed.")
-                print("Set manualArm to True if desiring script to arm the drone.")
+                print("Please set armed == True.")
                 return None
-        print("Look out! Props are spinning!!")
+        print("Propellers will start spinning.")
                 
         vehicle.simple_takeoff(targetHeight) ##meters
 
@@ -159,7 +158,7 @@ def landing_drone():
     #while True:
     global first_run, notfound_count, found_count, aruco_marker_size, start_time
     if first_run==0:
-        print("First run of lander!!")
+        print("First run of landing_drone.")
         first_run=1
         start_time=time.time()
     
@@ -260,8 +259,7 @@ while vehicle.armed==True:
 
 print("")
 print("----------------------------------")
-print("Arrived at the waypoint destination!")
-print("Gathering info and heading home.")
+print("Arrived at the destination!")
 
 
 
