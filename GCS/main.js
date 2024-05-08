@@ -75,7 +75,7 @@ function messageWebSocketRas(ev){
   let battery_state1 = (Battery_percents1.toFixed(0));
   const progress1 = document.querySelector('.progress_done1');
 
-  progress1.style.width = battery_state1 + "%";
+  progress1.style.width = parseFloat(battery_state1) + "%";
   
   document.getElementById('battery_state_bar1').innerHTML = battery_state1 + "%";
   console.log(typeof battery_state1);
