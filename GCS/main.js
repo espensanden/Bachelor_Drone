@@ -119,7 +119,7 @@ function messageWebSocketRas(ev){
   battery_total_voltage_to_percent = 0.02;
   Battery_total_voltage = parseFloat(BATTERY_VOLTAGE_CELL1) + parseFloat(BATTERY_VOLTAGE_CELL2) + parseFloat(BATTERY_VOLTAGE_CELL3) + parseFloat(BATTERY_VOLTAGE_CELL4) 
   console.log(Battery_total_voltage)
-  Battery_percents_total = ((Battery_total_voltage-15.2) / battery_total_voltage_to_percent);
+  Battery_percents_total = ((Battery_total_voltage-14.8) / battery_total_voltage_to_percent);
   console.log(Battery_percents_total)
 
   let battery_state_total = Battery_percents_total.toFixed(0);
