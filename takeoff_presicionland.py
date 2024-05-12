@@ -189,7 +189,7 @@ def landing_drone():
         print('Target likely not found. Error: '+str(e))
         notfound_count=notfound_count+1
 
-    cv2.imshow('Frame', im)  # Display the frame
+#    cv2.imshow('Frame', im)  # Display the frame
 
 
 #Vehicle connect
