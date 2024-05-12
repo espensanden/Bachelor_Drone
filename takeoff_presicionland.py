@@ -8,7 +8,7 @@ from pymavlink import mavutil
 
 
 #Variables
-takeoff_height = 2
+takeoff_height = 3 #meter
 velocity = 0.5
 
 first_run = 0
@@ -175,6 +175,7 @@ def landing_drone():
                 send_land_message(x_ang,y_ang)
             else:
                 send_land_message(x_ang,y_ang)
+                print("Vehicle is now in land mode 2 else")
                 pass
 
             print("x centre pixel: "+str(x_avg)+" y centre pixel: "+str(y_avg))
