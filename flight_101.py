@@ -248,7 +248,7 @@ print("Saved home location to: ", wp_home)
 wp_target=LocationGlobalRelative(lat_target,lon_target,takeoff_height)
 wp_target_c=LocationGlobalRelative(lat_target_c,lon_target_c,takeoff_height)
 
-distanceBetweenLaunchAndTarget=get_distance_meters(wp_target,wp_home)
+distanceBetweenLaunchAndTarget=get_distance_meters(wp_target,wp_target_c)
 print("Target location is "+str(distanceBetweenLaunchAndTarget)+" meters from charging station.")
 
 print(vehicle.parameters['PLND_ENABLED'])
