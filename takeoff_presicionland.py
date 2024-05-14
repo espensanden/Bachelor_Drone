@@ -142,6 +142,7 @@ def landing_drone():
         vehicle.mode=VehicleMode("LAND")
         while vehicle.mode!='LAND':
             print('WAITING FOR DRONE TO ENTER LAND MODE')
+            vehicle.mode=VehicleMode("LAND")
             time.sleep(1)
 
     try:
@@ -205,6 +206,8 @@ vehicle.parameters['LAND_SPEED'] = 20 ##Descent speed of 30cm/s
 
 print(vehicle.parameters['PLND_ENABLED'])
 print(vehicle.parameters['PLND_TYPE'])
+print(vehicle.parameters['PLND_EST_TYPE'])
+
 
 if script_mode == 1:
     arm_and_takeoff(takeoff_height)
