@@ -125,8 +125,8 @@ def send_local_ned_velocity(vx, vy, vz):
 def send_land_message(x,y,z):
 
 
-    x_offset_rad = m.atan(x / z)
-    y_offset_rad = m.atan(y / z)
+    x_offset_rad = math.atan(x / z)
+    y_offset_rad = math.atan(y / z)
     distance = np.sqrt(x * x + y * y + z * z)
 
 
