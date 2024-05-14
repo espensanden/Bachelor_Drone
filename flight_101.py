@@ -9,15 +9,15 @@ from pymavlink import mavutil
 
 
 #GPS coordinates to target
-lat_target = 59.8958075
-lon_target = 10.7671008
+lat_target = 59.8955837
+lon_target = 10.7675065
 
 
 #target c
-
+"""
 lat_target_c = 59.8956395
 lon_target_c = 10.7671712
-
+"""
 
 #Variables
 takeoff_height = 3
@@ -246,7 +246,7 @@ lon_home=vehicle.location.global_relative_frame.lon
 wp_home=LocationGlobalRelative(lat_home,lon_home,takeoff_height)
 print("Saved home location to: ", wp_home)
 wp_target=LocationGlobalRelative(lat_target,lon_target,takeoff_height)
-wp_target_c=LocationGlobalRelative(lat_target_c,lon_target_c,takeoff_height)
+#wp_target_c=LocationGlobalRelative(lat_target_c,lon_target_c,takeoff_height)
 
 distanceBetweenLaunchAndTarget=get_distance_meters(wp_target,wp_home)
 print("Target location is "+str(distanceBetweenLaunchAndTarget)+" meters from charging station.")
@@ -257,7 +257,7 @@ print(vehicle.parameters['PLND_TYPE'])
 #vehicle.groundspeed = 1
 
 arm_and_takeoff(takeoff_height)
-goto(wp_target_c)
+#goto(wp_target_c)
 goto(wp_target)
 print("executed target")
 goto(wp_home)
