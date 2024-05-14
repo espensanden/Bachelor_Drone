@@ -102,7 +102,7 @@ function messageWebSocketRas(ev){
   const progress3 = document.querySelector('.progress_done3');
 
   progress3.style.width = battery_state3 + "%";
-  
+   
   document.getElementById('battery_state_bar3').innerHTML = battery_state3 + "%";
 
   console.log(BATTERY_VOLTAGE_CELL4)
@@ -149,18 +149,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-function setButtonRandomColor() {
-    var letters = '0123456789ABCDEF';
-    var color = '#';
-    for (var i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
-    }
-    document.getElementById("light-indicator1").style.backgroundColor = color;
-  }
-
-
-
-
 function sendCommandPico(command) {
     console.log("Sending message", command);
     webSocketPico.send(command);
@@ -175,7 +163,6 @@ function sendCommandRas(command) {
 }
 
 function callBack(){
-  document.getElementById("light-indicator1").style.backgroundColor = setButtonRandomColor();
   sendCommandPico(''); 
   //sendCommandRas('');
   sendCommandRas('BATTERY_STATS');
