@@ -271,7 +271,7 @@ print(vehicle.parameters['PLND_TYPE'])
 
 arm_and_takeoff(takeoff_height)
 
-goto(wp_target)
+#goto(wp_target)
 goto(wp_target_c)
 print("executed target")
 #goto(wp_home)
