@@ -122,16 +122,29 @@ def send_local_ned_velocity(vx, vy, vz):
 	vehicle.send_mavlink(msg)
 	vehicle.flush()
     
-def send_land_message(x,y):
+def send_land_message(x,y,z):
+
+
+    x_offset_rad = m.atan(x / z)
+    y_offset_rad = m.atan(y / z)
+    distance = np.sqrt(x * x + y * y + z * z)
+
+
     msg = vehicle.message_factory.landing_target_encode(
         0,
         0,
         mavutil.mavlink.MAV_FRAME_BODY_OFFSET_NED,
-        x,
-        y,
+        x_offset_rad,
+        y_offset_rad,
+        distance,
         0,
         0,
-        0,)
+        0,
+        0,
+        0,
+        (1,0,0,0),
+        2,
+        1,)
     vehicle.send_mavlink(msg)
     vehicle.flush()
 
