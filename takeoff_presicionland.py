@@ -8,7 +8,7 @@ from pymavlink import mavutil
 
 
 #Variables
-takeoff_height = 3 #meter
+takeoff_height = 2 #meter
 velocity = 0.5
 
 first_run = 0
@@ -21,7 +21,7 @@ found_count=0
 notfound_count=0
 
 #targetaltitude
-targetAltitude = 3
+targetAltitude = 2
 
 id_to_find = 0
 aruco_marker_size = 10 #in cm
