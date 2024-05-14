@@ -20,7 +20,7 @@ lon_target_c = 10.7676379
 
 
 #Variables
-takeoff_height = 3
+takeoff_height = 5
 velocity = 1
 
 
@@ -33,7 +33,7 @@ end_time=0
 found_count=0
 notfound_count=0
 
-targetAltitude=3
+targetAltitude=5
 
 id_to_find = 0
 aruco_marker_size = 10 #in cm
