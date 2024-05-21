@@ -20,7 +20,7 @@ lon_target_c = 10.7676379
 
 
 #Variables
-takeoff_height = 3
+takeoff_height = 5
 velocity = 1
 
 
@@ -33,7 +33,7 @@ end_time=0
 found_count=0
 notfound_count=0
 
-targetAltitude=3
+targetAltitude=5
 
 id_to_find = 0
 aruco_marker_size = 10 #in cm
@@ -122,16 +122,29 @@ def send_local_ned_velocity(vx, vy, vz):
 	vehicle.send_mavlink(msg)
 	vehicle.flush()
     
-def send_land_message(x,y):
+def send_land_message(x,y,z):
+
+
+    x_offset_rad = math.atan(x / z)
+    y_offset_rad = math.atan(y / z)
+    distance = np.sqrt(x * x + y * y + z * z)
+
+
     msg = vehicle.message_factory.landing_target_encode(
         0,
         0,
         mavutil.mavlink.MAV_FRAME_BODY_OFFSET_NED,
-        x,
-        y,
+        x_offset_rad,
+        y_offset_rad,
+        distance,
         0,
         0,
-        0,)
+        0,
+        0,
+        0,
+        (1,0,0,0),
+        2,
+        1,)
     vehicle.send_mavlink(msg)
     vehicle.flush()
 
@@ -248,7 +261,7 @@ print("Saved home location to: ", wp_home)
 wp_target=LocationGlobalRelative(lat_target,lon_target,takeoff_height)
 wp_target_c=LocationGlobalRelative(lat_target_c,lon_target_c,takeoff_height)
 
-distanceBetweenLaunchAndTarget=get_distance_meters(wp_target,wp_home)
+distanceBetweenLaunchAndTarget=get_distance_meters(wp_target,wp_target_c)
 print("Target location is "+str(distanceBetweenLaunchAndTarget)+" meters from charging station.")
 
 print(vehicle.parameters['PLND_ENABLED'])
@@ -258,7 +271,7 @@ print(vehicle.parameters['PLND_TYPE'])
 
 arm_and_takeoff(takeoff_height)
 
-goto(wp_target)
+#goto(wp_target)
 goto(wp_target_c)
 print("executed target")
 #goto(wp_home)
