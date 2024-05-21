@@ -9,14 +9,14 @@ from pymavlink import mavutil
 
 
 #GPS coordinates to target
-lat_target = 59.8955968
-lon_target = 10.7675843
+lat_target = 59.8955837
+lon_target = 10.7675065
 
 
 #target c
 
-lat_target_c = 59.8955716
-lon_target_c = 10.7676077
+lat_target_c = 59.8954687
+lon_target_c = 10.7676379
 
 
 #Variables
@@ -122,8 +122,8 @@ def send_local_ned_velocity(vx, vy, vz):
 	vehicle.send_mavlink(msg)
 	vehicle.flush()
     
-def send_land_message(x,y,z):
-
+def send_land_message(x,y):
+    global z
 
     x_offset_rad = math.atan(x / z)
     y_offset_rad = math.atan(y / z)
@@ -188,7 +188,7 @@ def landing_drone():
     if vehicle.mode!='LAND':
         vehicle.mode=VehicleMode("LAND")
         while vehicle.mode!='LAND':
-            print('WAITING FOR DRONE TO ENTER LAND MODE')
+            print('Waiting for drone to enter LAND mode.')
             time.sleep(1)
 
     try:
@@ -271,7 +271,7 @@ print(vehicle.parameters['PLND_TYPE'])
 
 arm_and_takeoff(takeoff_height)
 
-goto(wp_target)
+#goto(wp_target)
 goto(wp_target_c)
 print("executed target")
 #goto(wp_home)
