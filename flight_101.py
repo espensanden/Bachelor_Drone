@@ -9,14 +9,15 @@ from pymavlink import mavutil
 
 
 #GPS coordinates to target
-lat_target = 59.8955837
-lon_target = 10.7675065
+lat_target = 59.8955968
+lon_target = 10.7675843
 
 
 #target c
 
-lat_target_c = 59.8954687
-lon_target_c = 10.7676379
+lat_target_c = 59.8955716
+lon_target_c = 10.7676077
+
 
 
 #Variables
@@ -271,7 +272,7 @@ print(vehicle.parameters['PLND_TYPE'])
 
 arm_and_takeoff(takeoff_height)
 
-#goto(wp_target)
+goto(wp_target)
 goto(wp_target_c)
 print("executed target")
 #goto(wp_home)
