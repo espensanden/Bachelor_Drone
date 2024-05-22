@@ -243,8 +243,8 @@ vehicle.parameters['LAND_SPEED'] = 20 ##Descent speed of 30cm/s
 
 
 ###Record home waypoint so we can fly home after delivery
-lat_home=vehicle.location.global_relative_frame.lat
-lon_home=vehicle.location.global_relative_frame.lon
+lat_home = vehicle.location.global_relative_frame.lat
+lon_home = vehicle.location.global_relative_frame.lon
 
 wp_home=LocationGlobalRelative(lat_home,lon_home,takeoff_height)
 print("Saved home location to: ", wp_home)
