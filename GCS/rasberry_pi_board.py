@@ -29,7 +29,7 @@ def new_client(client, server):
 
 def message_received(client, server, message):
     print("Received message from client {}: {}".format(client['id'], message))
-    # Gjør ønsket behandling av den mottatte meldingen her
+    # get message
     if message == "CHARGING_PLATE_ON":
         print ("plate is on")
     elif message == 'BATTERY_STATS':

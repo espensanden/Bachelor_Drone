@@ -39,7 +39,7 @@ let BATTERY_VOLTAGE_CELL3;
 let BATTERY_VOLTAGE_CELL4;
 
   
-//tar i mot beskjed fra raspberry
+//get message from Raspberry pi
 function messageWebSocketRas(ev){
   console.log('<<< ' + ev.data);
   switch (ev.data) {
@@ -155,7 +155,7 @@ function sendCommandPico(command) {
 }
 
 
-//få opp kommunikasjon med Raspberry pi
+//set up communication with Raspberry Pi
 function sendCommandRas(command) {
   console.log("Sending message to Raspberry Pi:", command);
 
