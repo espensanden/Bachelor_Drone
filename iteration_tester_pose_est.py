@@ -30,9 +30,9 @@ if len(sys.argv)>1:
 
 #OpenCV stuff
 id_to_find=0
-marker_size=17.5 #cm
+marker_size=10 #cm
 
-realWorldEfficiency=.7 ##Since the Iterations/second are slower when the drone is flying the effeciency will be lower when flying.
+real_world_efficiency=.7 ##Since the Iterations/second are slower when the drone is flying the effeciency will be lower when flying.
 
 cameraMatrix = np.array([[774.5585769798772, 0.0, 619.694166336029],
                          [0.0, 772.9641015632712, 352.49790332793935],
@@ -86,7 +86,7 @@ while time.time()-start_time<seconds:
     counter=float(counter+1)
 
 if viewVideo==False:
-    frequency=realWorldEfficiency*(counter/seconds)
+    frequency=real_world_efficiency*(counter/seconds)
     print("")
     print("")
     print("")

@@ -47,7 +47,7 @@ vehicle_land = True
 def landing_drone():
     global first_run, notfound_count, found_count, aruco_marker_size, start_time, vehicle_land
     if first_run == 0:
-        print("First run of lander!!")
+        print("First run of landing_drone.")
         first_run = 1
         start_time = time.time()
     im = picam2.capture_array()
