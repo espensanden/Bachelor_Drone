@@ -11,14 +11,11 @@ webSocketPico.addEventListener('message', messageWebSocketPico)
 function messageWebSocketPico(ev) {
     console.log('<<< ' + ev.data);
     switch (ev.data) {
-        case 'INDICATOR_LIGHT':
-          setButtonRandomColor()
-          break;
         case 'CHARGING_ON':
           document.getElementById("light-indicator2").style.backgroundColor = "yellow"; 
           break;
         case 'CHARGING_OFF': 
-          document.getElementById("light-indicator2").style.backgroundColor = "grey";
+          document.getElementById("light-indicator2").style.backgroundColor = "red";
           break;
         case ev.data.startsWith("CHARGER_VOLTAGE:"):  
           break;
@@ -26,9 +23,9 @@ function messageWebSocketPico(ev) {
         default:
           console.log("");
 
-    if (ev.data.startsWith("CHARGER_VOLTAGE:")){
+    if (ev.data.startsWith("CHARGER_CURRENT:")){
       var CHARGER_VOLTAGE = ev.data.split(":")[1];
-      document.getElementById("charger-voltage-plate").innerHTML = CHARGER_VOLTAGE + "A";
+      document.getElementById("charger-current-plate").innerHTML = CHARGER_VOLTAGE + "A";
       }
   } };
 
@@ -44,14 +41,13 @@ function messageWebSocketRas(ev){
   console.log('<<< ' + ev.data);
   switch (ev.data) {
     case 'ras_say_the_plate_is_off':
-      document.getElementById("light-indicator3").style.backgroundColor = "grey"; 
+      document.getElementById("lsight-indicator3").style.backgroundColor = "grey"; 
       break;   
     default:
       console.log("");
     if (ev.data.startsWith("BATTERY_VOLTAGE_CELL0:")){
       BATTERY_VOLTAGE_CELL1 = ev.data.split(":")[1];
       document.getElementById("battery-cell1").innerHTML = BATTERY_VOLTAGE_CELL1 + "V";
-      
     }
     else if (ev.data.startsWith("BATTERY_VOLTAGE_CELL1:")){
       BATTERY_VOLTAGE_CELL2 = ev.data.split(":")[1];

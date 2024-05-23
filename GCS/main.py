@@ -75,9 +75,10 @@ lcd.putstr("Connecting to")
 lcd.move_to( 1,1)
 lcd.putstr("controlcenter")
 
-
 @app.route('/ws')
+
 @with_websocket
+
 async def read_sensor(request, ws):
     charger_curent_value_length = 0
     lcd.clear()
@@ -87,9 +88,6 @@ async def read_sensor(request, ws):
             data = await asyncio.wait_for(ws.receive(), timeout = 1)
         except asyncio.TimeoutError:
             pass
-            
-      
-
         print(data)
         if data == "CHARGING_PLATE_ON":
             pico_led.on()
@@ -97,9 +95,6 @@ async def read_sensor(request, ws):
         elif data == "CHARGING_PLATE_OFF":
             pico_led.off()
             pin_charger.off()
-        elif data == "BUTTON":
-            print("Button pressed")
-            await ws.send("INDICATOR_LIGHT")
         elif data == "DRONE_IS_FULL_CHARGED":
             green_led_on()
         elif data == "DRONE_IS_CHARING":
@@ -121,7 +116,7 @@ async def read_sensor(request, ws):
         if charger_curent_value < 0.015:
             charger_curent_value = 0 
         print(charger_curent_value)
-        await ws.send("CHARGER_VOLTAGE:"+str(charger_curent_value))
+        await ws.send("CHARGER_CURRENT:"+str(charger_curent_value))
         if len(str(charger_curent_value)) != len(str(charger_curent_value_length)):
             lcd.clear()
         charger_curent_value_length = charger_curent_value
