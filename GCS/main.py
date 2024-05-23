@@ -28,8 +28,8 @@ def lcd_connecting():
     lcd.putstr(ssid)
 
 
-ssid = 'TP-Link_97A6' # house ssid = 'ASUS'
-password = '61728500' # password = '' 
+ssid = 'TP-Link_97A6'
+password = '61728500'
 
 
 
