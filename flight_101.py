@@ -28,6 +28,7 @@ lon_target_d = 10.8676880
 takeoff_height = 3
 velocity = 1
 
+waypoint_height = 1
 
 first_run = 0
 start_time = 0
@@ -255,6 +256,8 @@ print("Saved home location to: ", wp_home)
 wp_target=LocationGlobalRelative(lat_target,lon_target,takeoff_height)
 wp_target_c=LocationGlobalRelative(lat_target_c,lon_target_c,takeoff_height)
 wp_target_d=LocationGlobalRelative(lat_target_d,lon_target_d,takeoff_height)
+wp_target_d_2=LocationGlobalRelative(lat_target_d,lon_target_d,waypoint_height)
+
 
 
 distanceBetweenLaunchAndTarget=get_distance_meters(wp_target,wp_target_c)
@@ -268,6 +271,8 @@ print(vehicle.parameters['PLND_TYPE'])
 arm_and_takeoff(takeoff_height)
 
 goto(wp_target_c)
+goto(wp_target_d)
+goto(wp_target_d_2)
 goto(wp_target_d)
 goto(wp_target)
 print("executed target")
