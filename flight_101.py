@@ -28,7 +28,7 @@ lon_target_d = 10.8676880
 takeoff_height = 3
 velocity = 1
 
-waypoint_height = 1
+waypoint_height = 2
 
 first_run = 0
 start_time = 0
